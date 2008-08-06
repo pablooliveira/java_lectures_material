@@ -1,0 +1,57 @@
+I - WARM UP
+
+1) Write a class Numbers with a main method that prints the numbers from 1 to 100.
+
+  class Numbers {
+    public static void main (String args[]) {
+      for (int i = 1; i <= 100; i++) {
+        System.out.println(i);
+      }
+    }
+  } 
+
+2) A naïve method for determining if a number n is prime is checking that all the numbers smaller 
+   than the square root of n are not divisors of n.
+
+   Add a static method "bool isPrime(long n)" that implements this algorithm in the class Numbers ?
+
+   You might need to use the methods:
+     double Math.sqrt(double n)
+
+   static bool isPrime (long n) {
+      for (long i = 0; i < Math.sqrt(n); i++) {
+        if (i % n == 0) return false; 
+      }
+      return true;
+   } 
+    
+3) Modify Numbers so that it prints all prime number smaller than 100.
+
+4) A more efficient way of computing the prime numbers smaller than N is the Eratosthenes sieve:
+    
+   1) Take a list of the numbers from 2 to N, call it numbers.
+   2) Take an empty list and call it primes.
+   3) Take the smaller number k in list numbers
+   4) If k is bigger than the square root of N, stop.
+   5) Append k to list primes.
+   6) Remove all the multiples of k from numbers.
+   7) Start again at 3.
+
+   Implement this algorithm in java using arrays for the lists. Here are some guidelines to
+   help you:
+
+      * Create two arrays:
+           numbers of size N-1 and of bool type
+           primes  of size bigger than sqrt(N) and of long type
+      * numbers is a bool array, it allows us to model the list of numbers:
+          if cell k is true that means that k is still in list numbers 
+          if cell k is false that means that k has been removed from list numbers
+      * primes is just a long array that we will use to store the primes
+
+II - TURTLE GRAPHICS
+
+You are provided with a class Sheet and a class Turtle.
+
+The class Sheet 
+
+ 
