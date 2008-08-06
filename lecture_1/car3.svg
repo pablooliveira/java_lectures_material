@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="368"
+   height="340"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.45.1"
+   sodipodi:docbase="/home/pd218234/java/Slides"
+   sodipodi:docname="car3.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow2Lend"
+       style="overflow:visible">
+      <path
+         id="path3420"
+         style="font-size:12px;fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.97309,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="matrix(-1.1,0,0,-1.1,-1.1,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="486.30371"
+     inkscape:cy="140.03635"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     inkscape:window-width="1598"
+     inkscape:window-height="1181"
+     inkscape:window-x="0"
+     inkscape:window-y="17"
+     borderlayer="false"
+     width="368px"
+     height="340px" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-45.988918,-623.35543)">
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#38302b;stroke-width:0.66023946;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect3134"
+       width="131.15451"
+       height="76.707283"
+       x="66.883942"
+       y="649.02008" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="74.124893"
+       y="665.45349"
+       id="text3136"><tspan
+         sodipodi:role="line"
+         id="tspan3138"
+         x="74.124893"
+         y="665.45349">Turtle 1 </tspan></text>
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#38302b;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect3140"
+       width="130.81476"
+       height="46.669048"
+       x="67.053825"
+       y="680.30273" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="75.539108"
+       y="693.03064"
+       id="text3142"><tspan
+         sodipodi:role="line"
+         id="tspan3144"
+         x="75.539108"
+         y="693.03064">red</tspan><tspan
+         sodipodi:role="line"
+         x="75.539108"
+         y="708.03064"
+         id="tspan3146">(0, 0)</tspan><tspan
+         sodipodi:role="line"
+         x="75.539108"
+         y="723.03064"
+         id="tspan3148">90.0°</tspan></text>
+    <rect
+       y="799.02161"
+       x="66.885452"
+       height="77.411377"
+       width="131.15149"
+       id="rect3264"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#38302b;stroke-width:0.66325504;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <text
+       id="text3266"
+       y="815.45349"
+       x="74.124893"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="815.45349"
+         x="74.124893"
+         id="tspan3268"
+         sodipodi:role="line">Turtle 2 </tspan></text>
+    <rect
+       y="830.30273"
+       x="67.053825"
+       height="46.669048"
+       width="130.81476"
+       id="rect3270"
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#38302b;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <text
+       id="text3272"
+       y="843.03064"
+       x="75.539108"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="843.03064"
+         x="75.539108"
+         id="tspan3274"
+         sodipodi:role="line">blue</tspan><tspan
+         id="tspan3276"
+         y="858.03064"
+         x="75.539108"
+         sodipodi:role="line">'10, -5)</tspan><tspan
+         id="tspan3278"
+         y="873.03064"
+         x="75.539108"
+         sodipodi:role="line">35,4°</tspan></text>
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#38302b;stroke-width:0.84565759;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect3368"
+       width="130.96909"
+       height="126.01934"
+       x="262.44974"
+       y="699.17169" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="269.59796"
+       y="715.51239"
+       id="text3370"><tspan
+         sodipodi:role="line"
+         id="tspan3372"
+         x="269.59796"
+         y="715.51239">Class Turtle </tspan></text>
+    <rect
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#38302b;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect3374"
+       width="130.81476"
+       height="46.669048"
+       x="262.52692"
+       y="730.36163" />
+    <text
+       xml:space="preserve"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="267.01221"
+       y="743.08954"
+       id="text3376"><tspan
+         sodipodi:role="line"
+         id="tspan3378"
+         x="267.01221"
+         y="743.08954">color: a color</tspan><tspan
+         sodipodi:role="line"
+         x="267.01221"
+         y="758.08954"
+         id="tspan3380">position: coordinates</tspan><tspan
+         sodipodi:role="line"
+         x="267.01221"
+         y="773.08954"
+         id="tspan3382">rotation: an angle</tspan></text>
+    <text
+       id="text3384"
+       y="791.08954"
+       x="267.01221"
+       style="font-size:12px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         y="791.08954"
+         x="267.01221"
+         sodipodi:role="line"
+         id="tspan3390">turn(double angle)</tspan><tspan
+         y="806.08954"
+         x="267.01221"
+         sodipodi:role="line"
+         id="tspan2412">advance()</tspan><tspan
+         y="821.08954"
+         x="267.01221"
+         sodipodi:role="line"
+         id="tspan2414">readPosition()</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow2Lend);stroke-opacity:1"
+       d="M 154.85638,70.987837 L 211.42493,132.50613"
+       id="path3392"
+       transform="translate(45.988918,623.35543)" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;marker-end:url(#Arrow2Lend);stroke-opacity:1"
+       d="M 154.85638,217.35894 L 210.71782,157.96197"
+       id="path3394"
+       transform="translate(45.988918,623.35543)" />
+  </g>
+</svg>
