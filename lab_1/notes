@@ -46,12 +46,58 @@ I - WARM UP
       * numbers is a bool array, it allows us to model the list of numbers:
           if cell k is true that means that k is still in list numbers 
           if cell k is false that means that k has been removed from list numbers
-      * primes is just a long array that we will use to store the primes
+      * primes is a long array that we will use to store the primes when we find them.
 
 II - TURTLE GRAPHICS
 
-You are provided with a class Sheet and a class Turtle.
+You are provided with a class Sheet and a class Turtle in the package TurtleGraphics.
 
-The class Sheet 
+A Sheet models a graphical canvas. We can create a sheet using the constructor
+  Sheet (int width, int height); 
+where width and height are the dimensions of the canvas.
 
- 
+A Turtle models a logo turtle which moves upon a Sheet. You create a Turtle with the 
+constructor 
+  Turtle (Sheet sheet);
+
+You can command a turtle using the two public instance methods:
+  void turn (double degrees);
+  void advance (double steps);
+  
+Each turtle has a pen, if the pen is down then when the turtle moves it leaves a colored trail
+on the sheet. To change the pen state you can use the public methods:
+  void penDown();
+  void penUp();
+
+A) Various drawings:
+
+  1) Draw a square.
+  2) Draw a circle.
+  3) Draw a Koch's snow flake.
+
+B) Extending Turtles:
+  1) Create a new class that extends Turtle and allows to change the trail color with the methods:
+      void setPenColor(java.awt.Color color);
+  2) 
+
+C) Displaying an image from a file:
+
+Implement a program that reads an image in PPM (P6) format and displays it using the Turtle.
+
+Description of the PPM (P6) format:
+
+The file has two consecutive parts a header and a raster:
+
+HEADER
+line 0: P6                               P6
+line 1: <height> <width>                 200 300
+line 2: <max colors>                     255
+
+RASTER
+list of (height x width) RGB triplets.
+Each triplet correspond to the color of a pixel.
+It is composed of three bytes that give respectively the color intensity 
+for the RED, BLUE and GREEN channels.
+  
+You can use the constructor Color (int red, int green, int blue), which 
+returns a java.awt.color corresponding to the choosen RGB triplet.
