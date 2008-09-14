@@ -1,3 +1,5 @@
+package TurtleGraphics;
+
 import java.awt.*;   
 import java.awt.image.*;
 import java.awt.event.*;
@@ -7,6 +9,7 @@ public class Turtle {
   /* shape and color of this turtle */
   private Polygon turtleShape;
   private Color turtleColor = Color.BLUE;
+  private Color penColor = Color.WHITE;
 
   /* position and orientation of this turtle */
   private double x = 0;
@@ -17,19 +20,11 @@ public class Turtle {
   /* the sheet in which this turtle draws */
   private Sheet sheet = null;
   
-  public Turtle() {
+  public Turtle(Sheet sheet) {
+    this.sheet = sheet;
+    sheet.addTurtle(this);
     turtleShape = new Polygon(new int[] {0,0,10}, new int[] {3,-3,0}, 3);
   }
-
-  public void setSheet(Sheet sheet) {this.sheet = sheet;}
-
-  public void drawTurtle(Graphics2D graphics) {
-    graphics.setColor(turtleColor);
-    graphics.translate(x,y);     
-    graphics.rotate(theta);
-    graphics.fill(turtleShape);
-  }
-
   public void turn(double degrees) {
     double radians = degrees / 180 * Math.PI;
     theta += radians; 
@@ -40,7 +35,7 @@ public class Turtle {
     double newx = x + steps*Math.cos(theta);
     double newy = y + steps*Math.sin(theta);
     if (pen_down && sheet != null) {
-      sheet.drawLine(x,y,newx,newy);
+      sheet.drawLine(x,y,newx,newy, penColor);
     }
     x = newx;
     y = newy;
@@ -49,4 +44,12 @@ public class Turtle {
 
   public void penDown() { pen_down = true; }
   public void penUp() { pen_down = false; }
+  public void setPenColor(Color color) { penColor = color; }
+
+  protected void drawTurtle(Graphics2D graphics) {
+    graphics.setColor(turtleColor);
+    graphics.translate(x,y);     
+    graphics.rotate(theta);
+    graphics.fill(turtleShape);
+  }
 }

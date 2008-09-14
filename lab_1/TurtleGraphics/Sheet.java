@@ -1,3 +1,5 @@
+package TurtleGraphics;
+
 import java.util.*;
 import javax.swing.*; 
 import java.awt.*;   
@@ -5,21 +7,23 @@ import java.awt.image.*;
 import java.awt.event.*;
 import java.awt.geom.*;
 
-public class Sheet extends JPanel {
+public class Sheet extends JComponent {
   /* The image and associated graphic in which the turtles draw */ 
   private Image offscreen;  
   private Graphics2D gra;
 
   /* The collection of turtles drawing in this sheet */
-  public Collection<Turtle> turtles;
+  private Collection<Turtle> turtles;
 
   /* The width and height of the sheet */
   private int width;
   private int height;
 
   public Sheet(int width, int height) {
+      
     this.width = width;
     this.height = height;
+    setPreferredSize(new Dimension(width,height));
 
     /* Create an image for the turtles to draw in */
     offscreen = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
@@ -27,22 +31,17 @@ public class Sheet extends JPanel {
     gra.translate(width/2,height/2); 
     gra.scale(1,-1);
 
+    JFrame f = new JFrame("Turtle");
     /* Create a list to keep the turtles */
     turtles = new LinkedList<Turtle>();
-
+    
     /* Create a frame to show the sheet */
-    JFrame f = new JFrame("Turtle");
-    f.setSize(width, height);
-    f.getContentPane().add(this);
     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    f.setContentPane(this);
+    f.pack();
     f.setVisible(true);
   }
-
-  /* draw a line in the sheet image */
-  public void drawLine(double ax, double ay, double bx, double by) {
-    gra.draw(new Line2D.Double(ax,ay,bx,by));
-  }
-    
+ 
   /* draw the sheet: the sheet image and all the turtles */
   public void paint(Graphics g) {
     Graphics2D g2 = (Graphics2D) g;
@@ -64,6 +63,11 @@ public class Sheet extends JPanel {
 
   public void addTurtle(Turtle t) {
     turtles.add(t);
-    t.setSheet(this);
+  }
+
+  /* draw a line in the sheet image */
+  protected void drawLine(double ax, double ay, double bx, double by, Color color) {
+    gra.setColor(color);
+    gra.draw(new Line2D.Double(ax,ay,bx,by));
   }
 }
