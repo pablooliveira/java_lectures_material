@@ -63,8 +63,8 @@
     \item Java programs run inside a Virtual Machine (JVM), "a software implementation" of a computer.
           (this makes Java programs portable among different architectures).
     \item For the sake of performance and space, the JVM reads bytecode (a low level language).
-    \item It is easier for humags to write programs in a more expressive, high level language, like Java.
-    \item The java compiler is an automatic translator from Java to Bytecode. 
+    \item It is easier for humans to write programs in a more expressive, high level language, like Java.
+    \item The Java compiler is an automatic translator from Java to Bytecode. 
   \end{itemize}
 \end{frame}
 
@@ -80,9 +80,9 @@
    \item In this lecture we will learn about:
   \end{itemize}
    \begin{description}
-      \item[primitive types:] Basic representations of data
-      \item[      operators:] Simple operations on data 
-      \item[        objects:] Combine data representation and methods to transform data
+      \item[primitive types:] Basic representations of data.
+      \item[      operators:] Simple operations on data.
+      \item[        objects:] Combine data representation and methods to transform data.
       \item[   control flow:] Control which operations are done and how many times.
    \end{description}
 \end{frame}
@@ -118,6 +118,7 @@
   \end{example}
 \end{frame}
 
+% emphasize that = is different than equality
 \begin{frame}[fragile]
   \frametitle{Variables and Types} 
   \begin{itemize}
@@ -125,7 +126,7 @@
   Thus we introduce \structure{types},
   that tell us how a value should be used.
   \item
-  We also give each value a name (should start with (letter, \$, \_ ) and contain only (alphanumeric, \$, \_))
+  We also give each value a name (should start with \{letter, \$, \_ \} and contain only \{alphanumeric, \$, \_\}).
   \item 
   We call the association (name, type, value) a variable.
   \end{itemize}
@@ -140,7 +141,7 @@
    \pause 
    \lstinline!int city_population = 2167994;! & 32 bit range $[-2^{31}..2^{31}-1]$ \\ 
    \pause
-   \lstinline!long molecules;! &  64 bit defined on $[-2^{64}..2^{64}-1]$ \\
+   \lstinline!long molecules;! &  64 bit range $[-2^{64}..2^{64}-1]$ \\
    \hline
    \pause
    \lstinline!float mean_grade = 13.54;! & single precision(ex. 8 mt. 23) \\
@@ -149,8 +150,10 @@
 \end{example}
 \end{frame}
 
+
+% maybe introduce scopes before XXX
 \begin{frame}[fragile]
-  \frametitle{Mutable variables, assignement, final variables}
+  \frametitle{Mutable variables, assignment, final variables}
   
   The value of a variable can be modified during the execution of a program,
   except for final variables (which can only be assigned once). 
@@ -162,8 +165,8 @@ float b = 3; /* variable declaration with
 final float pi;
 pi = 3.14159;
 
-a = 8;  // assignement
-b = 1;  // assignement
+a = 8;  // assignment
+b = 1;  // assignment
 pi = 0; // illegal (won't compile) 
   \end{code}
 \end{frame}
@@ -180,7 +183,7 @@ float[] price;
 // reserve memory for 3 elements
 price = new float[3];
 
-// initialise the values of the elements
+// initialize the values of the elements
 price[0] = 1.00;
 price[1] = 5.99;
 price[2] = 3.25;
@@ -228,14 +231,14 @@ float[] price = {1.00, 5.99, 3.25};
  
   \begin{example}
    \begin{longtable}{l|r}
-   \lstinline!a = 5; b[4] = 30!& assignement\\
+   \lstinline!a = 5; b[4] = 30!& assignment\\
    \pause
    \lstinline!5 + 4! $\rightarrow$ \lstinline!9! & sum \\
    \lstinline!5 - 4! $\rightarrow$ \lstinline!1! & substraction \\
    \pause
    \lstinline!"hello " + "world"! $\rightarrow$ \lstinline!"hello world"! & concatenation \\
    \pause
-   \lstinline!4 * 4! $\rightarrow$ \lstinline!20! & multiplication \\
+   \lstinline!4 * 4! $\rightarrow$ \lstinline!16! & multiplication \\
    \lstinline!15 / 2! $\rightarrow$ \lstinline!7!,  
    \lstinline!15.0 / 2! $\rightarrow$ \lstinline!7.5! & integer or float division \\
    \lstinline!15 % 2! $\rightarrow$ \lstinline!1! & modulo \\
@@ -246,12 +249,14 @@ float[] price = {1.00, 5.99, 3.25};
   \end{example} 
 \end{frame}
 
+
+% hard to understand
 \begin{frame}[fragile]
   \frametitle{Increment operators}
   \begin{itemize}
-   \item Increment (\lstinline!++!), decrement (\lstinline!--!)  operators:
-  \begin{code}
-    int a,b;
+  \item \structure{Increment (\lstinline!++!), decrement (\lstinline!--!)  operators:}
+ \begin{code}
+    int a,b,c;
 
     a = 42;
     b = a++;
@@ -263,13 +268,14 @@ float[] price = {1.00, 5.99, 3.25};
   \end{code}
   \item with \lstinline!++a! the value of a is incremented, then the right side of the assignment is evaluated.
   \item with \lstinline!a++! the right side of the assignment is evaluated, then a is incremented.
+ 
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
   \frametitle{More Operators}
   \begin{itemize}
-  \item Operation + Assignement (\lstinline!+= -= *= /=! etc ...)
+  \item Operation + assignment (\lstinline!+= -= *= /=! etc ...)
   \begin{code}
      a += b;    // equivalent to:
      a = a + b; 
@@ -334,12 +340,12 @@ float[] price = {1.00, 5.99, 3.25};
   \pause
 \begin{example}
   A \alert{turtle} has a state composed of \alert{its color, its position and its orientation},
-  has some methods: \alert{turn, advance and readPosition}.
+  and some methods: \alert{turn, advance and readPosition}.
   \begin{center}
-  \only<2>{
+  \only<1>{
   \includegraphics[height=3cm]{tortue}
   }
-  \only<3>{
+  \only<1-2>{
   \includegraphics[height=3cm]{car1}
   }
   \end{center} 
@@ -413,7 +419,7 @@ turtle2.turn(20); turtle2.advance();
   \item Objects turtle1 and turtle2 are called \alert{instances} of class Turtle, 
   \item \lstinline!turtle2.color! represents the color \structure{for the specific instance turtle2}:
     \newline $\rightarrow$ \alert{color is an instance variable}
-  \item \lstinline!car1.readPosition()! returns the position of \structure{the specific instance turtle1}:
+  \item \lstinline!turtle1.readPosition()! returns the position of \structure{the specific instance turtle1}:
     \newline $\rightarrow$ \alert{readPosition() is an instance method}
   \end{itemize}
 
@@ -424,14 +430,14 @@ turtle2.turn(20); turtle2.advance();
 
 \begin{frame}[fragile,shrink]
   \frametitle{Static Methods/Variables}
-    \structure{Q: sharing a common variable between all the objects in a class ?}
+    \structure{Q: how to share a common variable between all the objects in a class ?}
     \begin{code}
 class Turtle {
   static int step_size = 5;
 }
     \end{code}
     \pause
-    \structure{Q: writing a method independant from a particular instance ?}
+    \structure{Q: how to write a method independent from a particular instance ?}
     \begin{code}
 class Turtle {
   static void degreesToRadians(double deg) { 
@@ -455,13 +461,14 @@ Turtle.degreesToRadians(30); -> 1.0471975512
   \begin{code}
     class MyFirstJavaProgram{
       public void static main (String args[]) {
-        System.out.println("Hello world!\n");
+        System.out.println("Hello world!");
       }
     }
   \end{code}
   (Note: public means this method can be called from anywhere, this is a prerequisite for
    the main method) 
 \end{frame}
+%XXX anywhere ... explain better scopes
 
 \section{Control Flow}
 \begin{frame}
@@ -519,7 +526,7 @@ for (int i = 0; i < 100; i++) {
 }
   \end{code}
 
-  \structure{Syntaxic sugar for:}
+  \structure{Syntax sugar for:}
   \begin{code}
 int i = 0;
 while (i < 100) {
