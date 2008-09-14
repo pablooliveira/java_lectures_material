@@ -1,0 +1,128 @@
+\documentclass[10pt]{beamer}
+\usepackage{xmpincl}
+\includexmp{license}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{ae}
+\usepackage[french]{babel}
+\usepackage{array, longtable}
+\usetheme{Antibes}
+\setbeamertemplate{navigation symbols}{}
+
+% for printing
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+%\pgfpagesuselayout{resize to}[a4paper,border shrink=5mm,landscape]
+
+
+\usepackage{listings}
+\usepackage{verbatim}
+\makeatletter
+\newwrite\lstvrb@out
+\newenvironment{code}{%
+  \begingroup
+  \@bsphack
+  \immediate\openout\lstvrb@out\jobname.lst
+  \let\do\@makeother\dospecials\catcode`\^^M\active
+  \def\verbatim@processline{%
+    \immediate\write\lstvrb@out{\the\verbatim@line}}%
+  \verbatim@start}{%
+  \immediate\closeout\lstvrb@out
+  \@esphack
+  \endgroup
+  
+  \begin{alertblock}{}
+    \lstinputlisting[language=java]{\jobname.lst}
+  \end{alertblock}}
+\makeatother 
+
+\lstset{language=java, basicstyle=\small, commentstyle=\color{blue}\textrm}
+
+\title{Introduction to Java}
+
+\subtitle{Lecture 2: Object Oriented Programming}
+
+\author[Pablo Oliveira]{Pablo Oliveira \texttt{<pablo@sifflez.org>}}
+\institute{ENST}
+
+\date{}
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Introduction: Object Oriented Programming}
+  \begin{itemize}
+    \item In the last lecture we learned that we can structure programs using 
+          objects of many classes.
+    \item In this lecture we will examine OOP concepts in more detail:
+      \begin{description}
+        \item[constructors:] creating new objects. 
+        \item[references:] designating objects.
+        \item[inheritance:] creating families of classes.
+        \item[encapsulation:] hiding implementation.
+        \item[polymorphism:] factorizing common behaviours.
+        \item[interfaces:] behavioral contracts.
+      \end{description}
+    \end{itemize}
+\end{frame}
+
+\section{Constructors}
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Constructors: creating a new object}
+
+\begin{code}
+  class aClass {
+    aClass () {
+    }
+
+    aClass (int a, float b) {
+    }
+
+  }
+\end{code}
+\end{frame}
+
+\section{References}
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\section{Inheritance}
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\section{Encapsulation}
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\section{Polymorphism}
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\section{Interfaces}
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents[currentsection]
+\end{frame}
+
+\end{document}
