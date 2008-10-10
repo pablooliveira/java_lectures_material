@@ -1,4 +1,4 @@
-\documentclass[10pt]{beamer}
+\documentclass[10pt,handout]{beamer}
 \usepackage{xmpincl}
 \includexmp{license}
 \usepackage[T1]{fontenc}
@@ -6,12 +6,14 @@
 \usepackage{ae}
 \usepackage[french]{babel}
 \usepackage{array, longtable}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees,fit,decorations.pathmorphing,backgrounds}
 \usetheme{Antibes}
 \setbeamertemplate{navigation symbols}{}
 
 % for printing
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+\usepackage{pgfpages}
+\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
 %\pgfpagesuselayout{resize to}[a4paper,border shrink=5mm,landscape]
 
 
@@ -38,7 +40,7 @@
 
 \lstset{language=java, basicstyle=\small, commentstyle=\color{blue}\textrm}
 
-\title{Introduction to Java}
+\title{Computer Science Introductory Course MSc - Introduction to Java}
 
 \subtitle{Lecture 2: Object Oriented Programming}
 
@@ -74,24 +76,27 @@
     \end{itemize}
 \end{frame}
 
-\section{Constructors}
-\begin{frame}
-  \frametitle{Outline}
-  \tableofcontents[currentsection]
-\end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Constructors: creating a new object}
 
+\begin{definition}
+  Constructors are special methods that are called to create a new instance of their class.
+\end{definition}
+
 \begin{code}
-  class aClass {
-    aClass () {
+  class BankAccount {
+    int balance;
+    BankAccount () {
+      balance = 0;  
     }
-
-    aClass (int a, float b) {
+    BankAccount (int initialDeposit){
+      balance = initialDeposit;
     }
-
   }
+
+  account1 = new BankAcconut();
+  account2 = new BankAccount(100);
 \end{code}
 \end{frame}
 
@@ -101,10 +106,253 @@
   \tableofcontents[currentsection]
 \end{frame}
 
+\begin{frame}[fragile,shrink]
+  \frametitle{References}
+  \begin{itemize}
+    \item When a variable is assigned a primitive type it contains a value.
+    \item When assigned an object, array or string, it contains a reference to the data.
+    \item If a is copied or passed, old and new references point to the \alert{same original object}.
+  \end{itemize}
+
+  \begin{code}
+static void changeValues (int anArray[], int value){
+  anArray[0] = 42;
+  value = 42;
+}
+public static void main (String args[]){
+  int v = 0; int[] a = {0,0};
+  System.out.println(v + " " + a[0] + " " + a[1]);
+  changeValues(a,v);
+  System.out.println(v + " " + a[0] + " " + a[1]);
+} 
+output : 
+0 0 0
+0 42 0
+  \end{code}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Immutability}
+  \begin{itemize}
+    \item String are a special case, because they are immutable (cannot be changed).
+    \item When you change a String a new different String is created and the characters of the orignal one are copied.
+    \item For performance : do not build a string with concatenation, use StringBuilder.
+  \end{itemize}
+  \begin{code}
+public static void main (String args[]) {
+  String s1 = "hello";
+  String s2 = s1;
+  s1 = s1 + "!";
+  System.out.println(s1 + " " + s2);
+}
+
+output : 
+hello! hello
+  \end{code}
+\end{frame}
+
 \section{Inheritance}
 \begin{frame}
   \frametitle{Outline}
   \tableofcontents[currentsection]
+\end{frame}
+\begin{frame}[fragile]
+  \frametitle{Inheritance}
+  \structure{Q: Remember our turtle ? It could turn and advance. But we want a new class Crab that advances sideways ...}
+  \begin{itemize}
+    \item We could write a new class Crab, but there would a lot of code in common with Turtle (which makes the code base
+          difficult to maintain).
+    \item We are going to use \alert{inheritance}.
+    \item Inheritance makes it possible to create a \alert{subclass} that inherits the properties of its ancestor or \alert{superclass}.
+  \end{itemize}
+  \only<1| handout:0>{
+  \begin{center}
+  \begin{tikzpicture}
+    [edge from parent fork down, ->, level distance=1cm, 
+     class/.style={fill=green!20,rounded corners}]
+    \node[class] at(0,0) {Animal}
+      child {node[class]{Turtle}}
+      child {node[class]{Crab}
+        child[edge from parent/.style={}]{node[fill=green!0, rounded corners, color=black!0]{RedCrab}}
+      }; 
+    \node at (3,0) {superclass}
+      child {node{subclass}}
+      ;
+    \end{tikzpicture}
+  \end{center}
+  }
+  \only<2| handout:1>{
+  \begin{center}
+  \begin{tikzpicture}
+    [edge from parent fork down, ->, level distance=1cm, 
+     class/.style={fill=green!20,rounded corners}]
+    \node[class] at(0,0) {Animal}
+      child {node[class]{Turtle}}
+      child {node[class]{Crab}
+        child{node[class]{RedCrab}}
+      }; 
+    \node at (3,0) {superclass}
+      child {node{subclass}}
+      ;
+    \end{tikzpicture}
+  \end{center}
+  }
+\end{frame}
+
+\begin{frame}[fragile, shrink]
+  \frametitle{Inheritance}
+  \begin{code}
+class Animal {
+  Color color;
+  Position position;
+  double rotation;
+    
+  void turn(double angle) {};
+  void advance() {};
+}
+
+class Crab extends Animal{
+  void advance() {
+    /* code for moving sideways */
+  }
+}
+
+Crab crab = new Crab();
+crab.color =  Color.BLUE;
+crab.advance();
+  \end{code}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{overriding and hiding}
+\structure{What we just did with method advance is called \alert{overriding}.}
+\begin{itemize}
+  \item When we call \verb!crab.advance()! the crab's advance is called!
+  \item The animal's advance has been overrided.
+  \item If a method or variable is not overriden, the superclass' is used:
+        \verb!crab.color! references in fact the animal color.
+  \item the \alert{\verb!final!} keyword in a method declaration indicates that the method cannot be overridden.
+\end{itemize}
+
+\structure{when we override a static method or variable, this is called \alert{hiding}.}
+\end{frame}
+
+\begin{frame}[fragile,shrink]
+\frametitle{this and super}
+  \begin{itemize}
+    \item for a given class \alert{\verb!this!} represents the current class and \alert{\verb!super!} the superclass. 
+    \item super allows to call a hiden or overrided superclass' methods (or variables).
+  \end{itemize}
+  \begin{code}
+class Animal {
+  void advance();    
+}
+
+class Crab extends Animal{
+  String name;
+  advance() {
+    this.turn(90);
+    super.advance();
+    this.turn(-90);
+  }
+}
+\end{code}
+\end{frame}
+
+\begin{frame}[fragile, shrink]
+  \frametitle{Inheritance and Constructors}
+  \begin{itemize}
+    \item In java all the classes are subclasses of the Object class. 
+    \item A subclass constructor will always call a superclass constructor.
+    \item If a class possess no constructor, an empty one with no parameters is implicit.
+    \item Every constructor of a subclass call the no-parameters superclass constructor.
+    \item But we can control this with \verb!super! and \verb!this! keywords.
+  \end{itemize}
+ \begin{center}
+  \begin{tikzpicture}
+    [edge from parent fork down, <-, 
+     sibling distance=3cm,
+     level distance=1cm,
+     level distance=1cm,
+     class/.style={fill=green!20,rounded corners}]
+     \node[class] {Object()}
+     child{ node[class]{Animal()}
+      child{node[class]{Crab()}
+        child {node[class]{RedCrab(String name)}}
+      }
+      child{node[class]{Crab(String name)}
+      }};
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}[fragile,shrink]
+  \begin{code}
+class Animal {
+  Position position;
+  double rotation;
+    
+  Animal(Position position, double rotation) {
+    this.position = position;
+    this.rotation = rotation;
+  }
+}
+
+class Crab extends Animal{
+  String name;
+  Crab(Position position) {
+    super(position, 90);
+  }
+  Crab(Position position, String name) {
+    this(position);
+    this.name = name;
+  }
+}
+\end{code}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{abstract methods}
+
+  \structure{Suppose we add birds to our class hierarchy.}
+
+  \begin{itemize}
+    \item birds and crabs do not move the same way, yet both should be subclasses of animal.
+    \item we could create an empty \verb!advance()! in the \verb!Animal! class and override it in \verb!Bird! and \verb!Crab!.
+    \item Yet, another programer could add a new subclass and forget to implement the \verb!advance()! method.
+    \item Thus, we use \alert{abstract methods}.
+  \end{itemize}
+
+  \begin{definition}
+    \begin{itemize}
+      \item An abstract method is a method which has no implementation. 
+      \item An abstract class is a class with abstract methods.
+      \item It is mandatory for all the non-abstract subclasses to override all the abstract methods.
+      \item An abstract class cannot be instantiated.
+    \end{itemize}
+ \end{definition}
+\end{frame}
+
+\begin{frame}[fragile,shrink]
+  \begin{code}
+abstract class Animal {
+  Position position;
+  double rotation;
+
+  abstract void advance();    
+ 
+}
+
+class Crab extends Animal{
+  String name;
+  void advance() {
+    /* crab moves */
+  }
+}
+
+Animal a = new Animal(); // COMPILATION ERROR
+Crab   c = new Crab();   // Works!
+\end{code}
 \end{frame}
 
 \section{Encapsulation}
@@ -113,16 +361,281 @@
   \tableofcontents[currentsection]
 \end{frame}
 
+\begin{frame}
+  \frametitle{Encapsulation}
+  \begin{definition}
+  Encapsulation is the act of hiding properties and methods inside a class.
+  \end{definition}
+  \begin{itemize}
+    \item This allows to protect classes from unexpected side-effects from the outside.
+    \item It also enforces implementation agnostic programming, which is a good idea.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Packages}
+  \begin{definition}
+  \begin{itemize}
+    \item A \alert{package} is a group of classes.
+    \item Packages define a \alert{namespace}.
+    \item Classes in the same package share the same \alert{namespace}. 
+  \end{itemize}
+  \end{definition}
+  \begin{code}
+    package Animals;
+    class Animal{}
+    class Crab{}
+
+    import Animals.Crab;
+    import Animals.*;
+    class MyProgram{}
+  \end{code}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Acces modifiers}
+  \structure{In java encapsultation is obtained through acces/visibility modifiers}.
+  \begin{itemize}
+    \item Classes can be \alert{\verb!public!}, visible by everyone \newline
+          or \alert{without modifier} in which case they are only visible inside their package (a group of classes).
+    \item Class members (variables and methods) can have 4 modifiers with different degrees of visibility.
+    \newline
+    \begin{longtable}{|c|c|c|c|c|}
+    \hline
+    Modifier    & Class & Package & Subclass & World \\
+    \hline
+    public      & Y     & Y       & Y        & Y \\
+    \hline
+    protected   & Y     & Y       & Y        & N \\
+    \hline
+    no modifier & Y     & Y       & N        & N \\
+    \hline
+    private     & Y     & N       & N        & N \\
+    \hline
+    \end{longtable}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{code}
+packages animals;
+class Animal {
+  private double rotation;
+  public void turn(double angle)
+    {position += angle;} 
+}
+class Crab extends Animal {
+  public void turnBack() {
+    turn(180);       // legal
+    rotation += 180; // illegal
+  }
+}
+\end{code}
+\end{frame}
+
 \section{Polymorphism}
 \begin{frame}
   \frametitle{Outline}
   \tableofcontents[currentsection]
 \end{frame}
 
+\begin{frame}[fragile,shrink]
+  \structure{Q: How to make a group of animals advance ?}
+  \begin{itemize}
+    \only<1>{
+    \item We want to make a group of animals (crabs and turtles) advance at the same time.
+    \item We need a container for all of them, what is the container type ?
+    }
+    \only<2>{
+    \item \alert{\huge{Nightmare}}
+    }
+  \end{itemize}
+    \begin{code}
+  int numberCrabs; int numberTurtles;
+  Crab[] crabs;
+  Turtle[] turtles;
+  
+  moveAllAnimals () {
+    for(int i=0; i < numberCrabs; i++)
+      crabs[i].advance();
+    for(int i=0; i < numberTurtles; i++)
+      turtles[i].advance();
+  }
+  void addCrab (Crab c) {crabs[numberCrabs++]=c;}
+  void addTurtle (Turtle t) 
+    {turtles[numberTurtles++]=t;}
+  
+  addCrab(new Crab());
+  addTurtle(new Turtle());
+    \end{code}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Polymorphism}
+  \structure{Use Polymorphism, or the capacity to treat an instance as one of its super classes}
+
+  \begin{code}
+  int numberAnimals;
+  Animal[] animals;
+  void moveAllAnimals(){
+    for (int i=0; i < numberAnimals; i++)
+      animals[i].advance();
+  }
+  void addAnimal(Animal a)
+    {animals[numberAnimals++] = a;} 
+  
+  addAnimal(new Crab());
+  addAnimal(new Turtle());
+  \end{code}
+
+\begin{itemize}
+    \item \alert{\huge{Better}}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Dynamic and Static type: Casts}
+\begin{code}
+  Animal animal;
+  animal = new Crab();  
+\end{code}
+\begin{description}
+\item[static type] Animal
+\item[dynamic type] Crab
+\end{description}
+\begin{itemize}
+  \item when calling an instance method the dynamic type is used.
+  \item when calling a static method the static type is used.
+  \item you can change the dynamic type (only to super-classes of the instanciation type) using casts:
+  \begin{code}
+    Crab c = (Crab) animal; // OK
+    Turtle t = (Turtle) animal; // Runtime ERROR
+  \end{code}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Dynamic dispatching}
+\begin{itemize}
+  \item When you call an instance method, the method used is the one provided by the dynamic class,
+        this is called \alert{dynamic dispatching}.
+  \item It is the really powerful idea behind polymorphism: 
+  \begin{itemize}
+    \item You can treat a group of objects the same way
+    \item When you do an operation on one of the objects, the adequate operation will be chosen depending on the
+          dynamic type of the object.
+  \end{itemize}
+\end{itemize}
+\end{frame}
 \section{Interfaces}
 \begin{frame}
   \frametitle{Outline}
   \tableofcontents[currentsection]
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Multiple inheritance ?}
+  \begin{itemize}
+    \item We have added further classes to our animal class hierarchy:
+      Swimming with method \verb!swim()!, Walking with
+      method \verb!walk()!.
+     \item As our turtle can both swim and walk we would like it to
+       inherit from both classes.
+     \item But in java this is \alert{forbidden}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Multiple inheritance : problem}
+  \begin{center}
+  \begin{tikzpicture}
+    [classbox/.style={rectangle, draw=black!50, rectangle split,
+      rectangle split parts=2, node distance=3cm}]
+    \node[classbox](A)  {\verb!class A!\nodepart{second}\verb!A.doIt();!};
+    \node[below left of=A,classbox] (B1)
+    {\verb!class B1!\nodepart{second}\verb!override: B1.doIt();!} edge[<-] (A);
+    \node[below right of=A,classbox] (B2)
+    {\verb!class B2!\nodepart{second}\verb!override: B2.doIt();!} edge[<-] (A);
+    \node[below left of=B2,classbox] (C) {\verb!class C!\nodepart{second}\verb!doIt() ?!} edge[<-] (B2) edge[<-] (B1);
+  \end{tikzpicture}
+  \end{center}
+  \alert{When we call \verb!doIt()! on C, do we call $B1$ or $B2$
+    implementation?}
+  \pause
+  \structure{Multiple answers to this problem (see for example Eiffel's
+    nice solution), Java Answer: \alert{Interfaces}}.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{definition}
+    An interface is a \alert{behavioural contract} that a class
+    decides to honor.
+    \begin{itemize}
+    \item Concretely, an interface is a collection of method signatures.
+    \item If a class \alert{\verb!implements!} an interface, it has to
+      provide a body for each of those methods.
+    \item A class can implement \structure{multiple} interfaces.
+    \item An interface can extend another (single) interface.
+     \end{itemize}
+ \end{definition}
+ \pause
+ \structure{Q: Why does it solves the multiple inheritance problem ?}
+ \structure{A: We multiply interface, we do not multiply implementation...}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Multiple inheritance with interfaces}
+  \begin{center}
+  \begin{tikzpicture}
+    [classbox/.style={rectangle, draw=black!50, rectangle split,
+      rectangle split parts=2, node distance=3cm}]
+    \node[classbox](A)  {\verb!interface A!\nodepart{second}\verb!doIt();!};
+    \node[below left of=A,classbox] (B1)
+    {\verb!interface B1!\nodepart{second}\verb!doIt();!} 
+    edge[<-] node{extends} (A);
+    \node[below right of=A,classbox] (B2)
+    {\verb!interface B2!\nodepart{second}\verb!doIt();!} 
+    edge[<-]
+    node{extends} (A);
+    \node[below left of=B2,classbox] (C) 
+    {\verb!class C!\nodepart{second}\verb!C.doIt()!} 
+    edge[<-, dotted] node{implements} (B2)
+    edge[<-, dotted] node{implements} (B1);
+  \end{tikzpicture}
+  \end{center}
+    \structure{B2 and B1 asked for a method \verb!doIt!, C provides
+      it, no ambiguity}
+\end{frame}
+
+\begin{frame}[fragile]
+  \begin{code}
+  public interface Swimming {
+    void swim();
+  }
+  public interface Walking {
+    void walk();
+  }
+  class Turtle extends Animal 
+               implements Swimming,Walking{
+    void swim() { /* swim implementation */}
+    void walk() { /* walk implementation */}
+  }
+  \end{code}
+\end{frame}
+
+\section{Summary}
+\begin{frame}
+  \frametitle{Summary}
+  
+  \begin{itemize}
+    \item To factorize code, creating classes hierarchies is
+      important.
+    \item Each class should hide its implementation to make code
+      robust and maintainable.
+    \item With polymorphism one can design elegant, factorised code.
+    \item When an object implements different behaviours, one should
+      use interfaces.
+  \end{itemize}
+\end{frame}
 \end{document}
