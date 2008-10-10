@@ -1,4 +1,4 @@
-\documentclass[10pt]{beamer}
+\documentclass[10pt,handout]{beamer}
 \usepackage{xmpincl}
 \includexmp{license}
 \usepackage[T1]{fontenc}
@@ -10,9 +10,9 @@
 \setbeamertemplate{navigation symbols}{}
 
 % for printing
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
-%\pgfpagesuselayout{resize to}[a4paper,border shrink=5mm,landscape]
+\usepackage{pgfpages}
+\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+\pgfpagesuselayout{resize to}[a4paper,border shrink=5mm,landscape]
 
 
 \usepackage{listings}
@@ -38,14 +38,14 @@
 
 \lstset{language=java, basicstyle=\small, commentstyle=\color{blue}\textrm}
 
-\title{Introduction to Java}
+\title{Computer Science Introductory Course MSc - Introduction to Java}
 
 \subtitle{Lecture 1: Diving into java}
 
 \author[Pablo Oliveira]{Pablo Oliveira \texttt{<pablo@sifflez.org>}}
 \institute{ENST}
 
-\date{}
+\date{13/10/2008}
 
 \begin{document}
 \begin{frame}
@@ -57,11 +57,12 @@
   \tableofcontents
 \end{frame}
 
+\section{Introduction}
 \begin{frame}[fragile]
   \frametitle{Introduction: Execution model}
   \begin{itemize}
-    \item Java programs run inside a Virtual Machine (JVM), "a software implementation" of a computer.
-          (this makes Java programs portable among different architectures).
+    \item Java programs run inside a Virtual Machine (JVM), "a software implementation" of a computer
+          (making Java programs portable among different architectures).
     \item For the sake of performance and space, the JVM reads bytecode (a low level language).
     \item It is easier for humans to write programs in a more expressive, high level language, like Java.
     \item The Java compiler is an automatic translator from Java to Bytecode. 
@@ -123,8 +124,8 @@
   \frametitle{Variables and Types} 
   \begin{itemize}
   \item
-  Thus we introduce \structure{types},
-  that tell us how a value should be used.
+  To lift this ambiguity we introduce \structure{types},
+  which specify how a value should be used.
   \item
   We also give each value a name (should start with \{letter, \$, \_ \} and contain only \{alphanumeric, \$, \_\}).
   \item 
@@ -202,11 +203,8 @@ float[] price = {1.00, 5.99, 3.25};
 
   \begin{alertblock}{Caution}
     \begin{itemize}
-    \item Strings and arrays are a mix between objects and primitive types. 
-    \item Some care must be taken when manipulating strings and arrays. 
-    Particularly, strings and arrays are references, and strings are immutable.  
-
-    \item Do not worry: we will talk about this in the next lecture.
+    \item Strings and arrays are a mix between objects and primitive types and thus some care must be taken when manipulating them. 
+    \item In the next lecture we will explain why when we'll talk about references and immutability.
     \end{itemize}
   \end{alertblock}
 \end{frame}
@@ -289,7 +287,7 @@ float[] price = {1.00, 5.99, 3.25};
     a == b; // --> true
     a != c; // --> true
   \end{code}
-  \item \alert{Referential equality when used with objects and strings (we'll come back to this later)}
+  \item \alert{Referential equality when used with objects, strings and arrays (we'll come back to this later)}
   \end{itemize}
 \end{frame}
 
@@ -452,8 +450,28 @@ Turtle.degreesToRadians(30); -> 1.0471975512
     \begin{definition}
       A static variable is shared among all the objects of a class.
       A static method is called in the context of a class and not for a specific object.
+      Static variables are also called class variables.
     \end{definition}
 \end{frame}
+
+\begin{frame}[fragile,shrink]
+  \frametitle{Local Variables / Scope}
+  \begin{definition}
+    Variables defined inside a method are called local variables.
+
+    The scope of a variable is the portion of code where it is visible (ie. where you can read it, 
+    or modify it).
+   \end{definition}
+   
+    \begin{itemize}
+      \item Local variables are only visible inside their method.
+      \item Instance and Static variables are visible in all the methods from their class.
+    \end{itemize}
+
+    In the next lecture we will talk about the visibility of methods, and about access modifiers
+    that regulate the visibility of methods/variables outside their class. 
+\end{frame}
+
 
 \begin{frame}[fragile]
   \frametitle{Main: the program entry point}
@@ -490,6 +508,8 @@ static int collatz (int n) {
   }
 }
     \end{code}
+
+  \structure{code between \{\} is called a block, variables defined inside a block are not visible outside}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -572,16 +592,16 @@ int whereIs(int element, int[] set) {
 \structure{We won't discuss switch/case control structure. If interested you may look it up! }
 \end{frame}
 
-\begin{frame}[fragile]
-\begin{center}
-  \tiny
-  This work is licensed under a Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported License.
-\vtop{
-  \vskip-3ex
-  \hbox{
-    \includegraphics[height=0.4cm]{cc-logo} 
-  }
-}
-\end{center}
-\end{frame}
+%\begin{frame}[fragile]
+%\begin{center}
+%  \tiny
+%  This work is licensed under a Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported License.
+%\vtop{
+%  \vskip-3ex
+%  \hbox{
+%    \includegraphics[height=0.4cm]{cc-logo} 
+%  }
+%}
+%\end{center}
+%\end{frame}
 \end{document}
