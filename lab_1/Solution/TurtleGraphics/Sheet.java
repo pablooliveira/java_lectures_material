@@ -61,7 +61,7 @@ public class Sheet extends JComponent {
     }
   }
 
-  public void addTurtle(Turtle t) {
+  protected void addTurtle(Turtle t) {
     turtles.add(t);
   }
 
