@@ -229,19 +229,18 @@ crab.advance();
 \begin{itemize}
   \item When we call \verb!crab.advance()! the crab's advance is called!
   \item The animal's advance has been overrided.
-  \item If a method or variable is not overriden, the superclass' is used:
-        \verb!crab.color! references in fact the animal color.
+  \item If a method is not overriden, the superclass' is used (here \verb!crab.turn(10);! would call Animal's turn implementation.
   \item the \alert{\verb!final!} keyword in a method declaration indicates that the method cannot be overridden.
 \end{itemize}
 
-\structure{when we override a static method or variable, this is called \alert{hiding}.}
+\structure{overriding a static method or a variable is called \alert{hiding}, because the new static implementation or variable \emph{hides} the old one, doing this is usually a bad idea.}
 \end{frame}
 
 \begin{frame}[fragile,shrink]
 \frametitle{this and super}
   \begin{itemize}
     \item for a given class \alert{\verb!this!} represents the current class and \alert{\verb!super!} the superclass. 
-    \item super allows to call a hiden or overrided superclass' methods (or variables).
+    \item super is used to call overriden superclass' methods.
   \end{itemize}
   \begin{code}
 class Animal {
@@ -317,7 +316,7 @@ class Crab extends Animal{
   \structure{Suppose we add birds to our class hierarchy.}
 
   \begin{itemize}
-    \item birds and crabs do not move the same way, yet both should be subclasses of animal.
+    \item birds and crabs do not move the same way... there is no common implementation for advance that we can put in Animals.
     \item we could create an empty \verb!advance()! in the \verb!Animal! class and override it in \verb!Bird! and \verb!Crab!.
     \item Yet, another programer could add a new subclass and forget to implement the \verb!advance()! method.
     \item Thus, we use \alert{abstract methods}.
