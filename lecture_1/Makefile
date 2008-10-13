@@ -1,4 +1,4 @@
-NAME=java_lecture
+NAME=java_lecture1
 SVG_IMAGES = car1.pdf car2.pdf car3.pdf method_anatomy.pdf tortue.pdf cc-logo.pdf 
 
 %.pdf: %.svg

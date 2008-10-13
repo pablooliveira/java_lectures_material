@@ -1,4 +1,4 @@
-NAME=java_lecture
+NAME=java_lecture2
 SVG_IMAGES = cc-logo.pdf 
 
 %.pdf: %.svg
