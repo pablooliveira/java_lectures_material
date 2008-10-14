@@ -137,12 +137,12 @@
    \lstinline!boolean is_it_raining = true;! & 1 bit logic value\\
    \pause
    \lstinline!byte life_expectancy = 70;! & 8 bit range $[-128..127]$ \\
-   \lstinline!short year;! & 16 bit defined on $[-2^{16}..2^{16}-1]$ \\
+   \lstinline!short year;! & 16 bit defined on $[-2^{15}..2^{15}-1]$ \\
    \lstinline!char unicode_character = 'A';! & UTF-16 caracter \\
    \pause 
    \lstinline!int city_population = 2167994;! & 32 bit range $[-2^{31}..2^{31}-1]$ \\ 
    \pause
-   \lstinline!long molecules;! &  64 bit range $[-2^{64}..2^{64}-1]$ \\
+   \lstinline!long molecules;! &  64 bit range $[-2^{63}..2^{63}-1]$ \\
    \hline
    \pause
    \lstinline!float mean_grade = 13.54;! & single precision(ex. 8 mt. 23) \\
@@ -478,7 +478,7 @@ Turtle.degreesToRadians(30); -> 1.0471975512
   \structure{Q: (At last ...) How do we start things up ?}
   \begin{code}
     class MyFirstJavaProgram{
-      public void static main (String args[]) {
+      public static void main (String args[]) {
         System.out.println("Hello world!");
       }
     }
