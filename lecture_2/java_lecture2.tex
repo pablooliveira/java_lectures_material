@@ -505,7 +505,7 @@ class Crab extends Animal {
 \begin{itemize}
   \item when calling an instance method the dynamic type is used.
   \item when calling a static method the static type is used.
-  \item you can change the dynamic type (only to super-classes of the instanciation type) using casts:
+  \item you can force the static type (only to super-classes of the dynamic type, or to the dynamic type) using casts:
   \begin{code}
     Crab c = (Crab) animal; // OK
     Turtle t = (Turtle) animal; // Runtime ERROR
