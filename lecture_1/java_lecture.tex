@@ -1,4 +1,4 @@
-\documentclass[10pt,handout]{beamer}
+\documentclass[10pt]{beamer}
 \usepackage{xmpincl}
 \includexmp{license}
 \usepackage[T1]{fontenc}
@@ -10,9 +10,9 @@
 \setbeamertemplate{navigation symbols}{}
 
 % for printing
-\usepackage{pgfpages}
-\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
-\pgfpagesuselayout{resize to}[a4paper,border shrink=5mm,landscape]
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+%\pgfpagesuselayout{resize to}[a4paper,border shrink=5mm,landscape]
 
 
 \usepackage{listings}
@@ -340,10 +340,10 @@ float[] price = {1.00, 5.99, 3.25};
   A \alert{turtle} has a state composed of \alert{its color, its position and its orientation},
   and some methods: \alert{turn, advance and readPosition}.
   \begin{center}
-  \only<1>{
+  \only<2-3>{
   \includegraphics[height=3cm]{tortue}
   }
-  \only<1-2>{
+  \only<3>{
   \includegraphics[height=3cm]{car1}
   }
   \end{center} 
