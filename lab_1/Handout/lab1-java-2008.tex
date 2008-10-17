@@ -53,7 +53,7 @@ Write a class \verb!Numbers! with a main method that prints the numbers from 1 t
 A naïve method for determining if a number $n$ is prime is checking that all the numbers smaller
 than $\sqrt{n}$ are not divisors of $n$.
 
-Add a static method "\verb!bool isPrime(long n)!" that implements this algorithm in the class \verb!Numbers!.
+Add a static method "\verb!boolean isPrime(long n)!" that implements this algorithm in the class \verb!Numbers!.
 You might need to use the method \verb!double Math.sqrt(double n)!.
 \item
  Modify \verb!Numbers! so that it prints all prime numbers smaller than 100.
@@ -74,8 +74,8 @@ explain below.
 \item Make a list of numbers from 2 to $N$, call it numbers.
 \item Take an empty list and call it primes.
 \item Take the smaller number $k$ in list numbers.
-\item If $k$ is bigger than the square root of $\sqrt{N}$, stop.
 \item Append $k$ to list primes.
+\item If $k$ is bigger than the square root of $\sqrt{N}$, go to 3.
 \item Remove all the multiples of $k$ from numbers.
 \item Start again at 3.
 \end{enumerate}
@@ -89,10 +89,10 @@ help you, they are not mandatory:
 \begin{itemize}
 \item Create two arrays:
 \begin{itemize}
-\item \verb!numbers! of size \verb!N-1! and with \verb!bool! type
+\item \verb!numbers! of size \verb!N-1! and with \verb!boolean! type
 \item \verb!primes! of size bigger than $\sqrt{N}$ and with \verb!long! type.
 \end{itemize}
-\item \verb!numbers! is a bool array, it allows us to handle the list of numbers:
+\item \verb!numbers! is a boolean array, it allows us to handle the list of numbers:
 \begin{itemize}
 \item if cell \verb!k! is \verb!true! that means that \verb!k! is still in list numbers
 \item if cell \verb!k! is \verb!false! that means that \verb!k! has been removed from list numbers
