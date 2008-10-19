@@ -1,0 +1,267 @@
+\documentclass[10pt]{beamer}
+\usepackage{xmpincl}
+\includexmp{license}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{ae}
+\usepackage[french]{babel}
+\usepackage{array, longtable}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,trees,fit,decorations.pathmorphing,backgrounds}
+\usetheme{Antibes}
+\setbeamertemplate{navigation symbols}{}
+
+% for printing
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+%\pgfpagesuselayout{resize to}[a4paper,border shrink=5mm,landscape]
+
+
+\usepackage{listings}
+\usepackage{verbatim}
+\makeatletter
+\newwrite\lstvrb@out
+\newenvironment{code}{%
+  \begingroup
+  \@bsphack
+  \immediate\openout\lstvrb@out\jobname.lst
+  \let\do\@makeother\dospecials\catcode`\^^M\active
+  \def\verbatim@processline{%
+    \immediate\write\lstvrb@out{\the\verbatim@line}}%
+  \verbatim@start}{%
+  \immediate\closeout\lstvrb@out
+  \@esphack
+  \endgroup
+  
+  \begin{alertblock}{}
+    \lstinputlisting[language=java]{\jobname.lst}
+  \end{alertblock}}
+\makeatother 
+
+\lstset{language=java, basicstyle=\small, commentstyle=\color{blue}\textrm}
+
+\title{Computer Science Introductory Course MSc - Introduction to Java}
+
+\subtitle{Lecture 3: Exceptions, Generics, Collections}
+
+\author[Pablo Oliveira]{Pablo Oliveira \texttt{<pablo@sifflez.org>}}
+\institute{ENST}
+
+\date{}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\section{Exceptions}
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Exceptions}
+  \begin{definition}
+    An exception is an event that indicates an abnormal condition disrupting the normal flow of the program.
+  \end{definition}
+  \begin{itemize}
+    \item Exception is a subclass of java.lang.Throwable.
+    \item When an exception is thrown the program is interrupted, the exception is propagated rewinding the call stack until an appropriate exception handler is found.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Creating and throwing an Exception}
+  \begin{code}
+    class MyException extends Exception {
+      MyException() {}
+      MyException(String message) {}
+    }
+
+    throw new MyException();
+  \end{code}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Catching an Exception}
+\begin{code}
+  try{
+    // code that can throw an exception 
+  } 
+  catch (MyException1 e) {
+    // treatment in case of Exception1
+  }
+  catch (MyException2 e) {
+    // treatment in case of Exception2
+  }
+  finally {
+    // always execute at the end of the try block
+  }
+\end{code}
+\begin{itemize}
+  \item finally is optional.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Exception rules}
+\begin{itemize}
+  \item If a method is thrown inside a method, one these two must be true:
+  \begin{itemize}
+    \item the exception is catched inside a try/catch block.
+    \item the method is declared to throw the exception (using keyword \verb!throws!)
+  \end{itemize}
+  \item One can throw an exception inside a catch block.
+  \item One can catch a group of exceptions using an Exception superclass.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Example}
+\begin{code}
+  class Example {
+    void foo() throws MyException {
+      try {
+        throw new MyException();
+      } catch (MyException e) {
+        throw e;
+      }
+    }
+    void bar() {
+      try {
+        foo();
+      } catch(Exception e) {
+        System.out.println("Problem!");
+      }
+    }
+  }
+\end{code}
+\end{frame}
+
+\section{Generics}
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Generics}
+\begin{definition}
+Generics are a way of instantiating classes or calling methods with a variable type paramater.
+This allows to remove unnecessary casts and make safer code, because the compiler knows which type he
+is supposed to work with and thus can generate the appropriate checks.
+\end{definition}
+\end{frame}
+
+\begin{frame}[fragile, shrink]
+\frametitle{List without generics}
+\structure{Q: We want to implement a list of objects ?}
+\begin{code}
+  class List {
+    private static final int maxSize = 100;
+    private int last = 0;
+    private Object list[];
+    List() {
+      list = new Object[maxSize];
+    }
+    void add(Object o) throws Exception{
+      if (last >= maxSize) 
+        throw new Exception("no place left");
+      list[last++] = o;
+    }
+    Object get(int index) {
+      return list[index];
+    }
+  }
+
+  List l = new List();
+  l.add("Hello");
+  String s = (String) l.get(0);
+  Integer i = (Integer) l.get(0); // error at runtime!
+\end{code}
+\end{frame}
+
+\begin{frame}[fragile, shrink]
+\frametitle{List with generics}
+\begin{code}
+  class List<T> {
+    private static final maxSize = 100;
+    private int last = 0;
+    private T list[];
+    List() {
+      list = (T[]) new Object[maxSize];
+    }
+    void add(T o) throws Exception{
+      if (last >= maxSize) 
+        throw new Exception("no place left");
+      list[last++] = o;
+    }
+    T get(int index) {
+      return list[index];
+    }
+  }
+
+  List<String> l = new List<String>();
+  l.add("Hello");
+  String s = l.get(0);
+  Integer i = l.get(0); // detected at compile time!
+\end{code}
+\end{frame}
+
+\begin{frame}[fragile, shrink]
+\frametitle{Generic methods and constructors}
+\begin{code}
+class Example {
+  <T> Example(T something) {}
+  <T> void foo(T something) {}
+}
+  
+  Example e = new Example("Hello"); //type inference, 
+  e.foo(new Integer(3));            //no need to pass <>
+\end{code}
+\end{frame}
+
+\section{Collections}
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents
+\end{frame}
+
+\begin{frame}
+  \frametitle{Collections}
+\begin{definition}
+  Collections framework is a group of classes in java libraries which eases the manipulation of 
+  group of objects.
+\end{definition}
+\begin{itemize}
+  \item All the classes in the collection framework implement the Collection interface.
+  \item The collection framework provides List, Set, Queue, Map, etc...
+  \item The collection classes can be provided with a generic type!
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Example}
+  \begin{code}
+    List<String> myList = new ArrayList<String>();
+    myList.add("Hello");
+    myList.add("Bye");
+    myList.get(1);
+    java.util.Collection.sort(myList);
+  \end{code}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{The for-each control construct}
+  \begin{code}
+    List<String> myList = new ArrayList<String>();
+    for (String s : myList) {
+      System.out.println(s);
+    }
+  \end{code}
+\end{frame}
+\end{document}
+
