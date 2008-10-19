@@ -1,0 +1,142 @@
+\documentclass[correction]{exercices}
+\usepackage{ae, aeguill, graphicx}
+\usepackage{fullpage}
+\usepackage{xspace}
+\usepackage{color}
+\usepackage{amsmath, amssymb}
+\usepackage{latexsym}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{verbatim}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\usepackage{listings}
+\usepackage{verbatim}
+
+\lstset{language=java, basicstyle=\small, commentstyle=\color{blue}\textrm}
+
+
+\begin{document}
+
+\sujet{Introduction to Java MsC - Exam - 2008}
+
+Documents and notes allowed. All electronic devices are forbidden.
+
+\section{Multiple choice questions }
+
+\begin{question}
+A \textbf{final} method 
+\begin{enumerate}
+\item cannot be invoked 
+\correct{cannot be overriden}
+\item must be overriden
+\item must be static
+\end{enumerate}
+\end{question}
+
+\begin{question}
+Which one of these propositions is \textbf{true} ?
+\begin{enumerate}
+\item The method main can be declared protected. 
+\correct{A private method can only be called from inside its own class.} 
+\item A method with no modifier can be called from a subclass.
+\item Private methods cannot be static.
+\end{enumerate}
+\end{question}
+
+\begin{question}
+Which one of these propositions is \textbf{false} ?
+\begin{enumerate}
+\correct{A subclass of an abstract class must be concrete.}
+\item An abstract class can implement an interface.
+\item An abstract class can have static methods.
+\item An abstract class can have final methods.
+\end{enumerate}
+\end{question}
+
+\begin{question}
+\hfill
+
+\begin{lstlisting}
+class A {
+  void foo() {System.out.print("A");}
+}
+class B extends A {
+  void foo() {System.out.print("B");}
+}
+class C {
+  public static void main(String args[]) {
+    A a = new A();
+    B b = new B();
+    A c = b;
+    a.foo();
+    b.foo();
+    c.foo();
+  }
+}
+\end{lstlisting}
+
+What is printed when we run class C ?
+\begin{enumerate}
+\item nothing because this program produces an error
+\correct{ABB}
+\item ABA
+\item AAA
+\end{enumerate}
+\end{question}
+
+
+\begin{question}
+\hfill
+
+\begin{lstlisting}
+class A {
+  A () {System.out.print("A");}
+  A (int i) {System.out.print("A" + i);}
+}
+class B extends A {
+  B (int i) {System.out.print("B" + i);}
+}
+class C extends B {
+  C (int i) {super(i);i++;System.out.print("C"+i);}
+  C () {this(1);}
+}
+\end{lstlisting}
+
+What is printed when we call \lstinline!new C();! ?
+\begin{enumerate}
+\item B1AC2
+\item A1B1C2
+\item B1C2A
+\correct{AB1C2}
+\end{enumerate}
+\end{question}
+
+\begin{question} \hfill
+\begin{lstlisting}
+public class A {
+  static void foo(int i, String[] st) {
+    i--;
+    st[i] = "bye";
+  }
+  public static void main(String args[]) {
+    int i = 1;
+    String greetings[] = {"hello","bye"}; 
+    foo(i,greetings);
+    System.out.println(greetings[0] + greetings[1] + i);
+  }
+}
+\end{lstlisting}
+
+What does this program prints ?
+\begin{enumerate}
+\correct{byebye1}
+\item byebye0
+\item hellohello1
+\item nothing because this program produces an error
+\end{enumerate}
+\end{question}
+
+
+
+\end{document}
