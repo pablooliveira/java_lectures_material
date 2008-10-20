@@ -47,9 +47,9 @@
 % PAGE LAYOUT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\setlength{\textwidth}{17cm}
+\setlength{\textwidth}{18cm}
 \setlength{\textheight}{26cm}
-\setlength{\topmargin}{-2.5cm}
+\setlength{\topmargin}{-1cm}
 %\setlength{\evensidemargin}{-1cm}
 \setlength{\oddsidemargin}{0cm}
 \setlength{\parindent}{0.0cm}
@@ -85,7 +85,7 @@ MSC \hfill Introduction du Java - Year #4\\
 \newenvironment{exercice}{\begin{exo}\upshape\par}{\end{exo}}
 
 \newtheorem{qus}{Question}
-\newenvironment{question}{\begin{qus}\upshape\par}{\end{qus}}
+\newenvironment{question}{\begin{minipage}[t]{\textwidth}\begin{qus}\upshape\par}{\end{qus}\end{minipage}\vspace{0.7cm}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Details...

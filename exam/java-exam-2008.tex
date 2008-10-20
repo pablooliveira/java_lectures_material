@@ -7,31 +7,48 @@
 \usepackage{latexsym}
 \usepackage{url}
 \usepackage{tikz}
+\usetikzlibrary{trees}
 \usepackage{verbatim}
 \renewcommand{\labelenumi}{(\alph{enumi})}
 
+\usepackage{multicol}
 \usepackage{listings}
 \usepackage{verbatim}
 
-\lstset{language=java, basicstyle=\small, commentstyle=\color{blue}\textrm}
+\lstset{language=java, showstringspaces=false}
 
 
 \begin{document}
 
 \sujet{Introduction to Java MsC - Exam - 2008}
 
+\begin{center}
 Documents and notes allowed. All electronic devices are forbidden.
+\\Answer on a separate sheet and don't forget to put your name on it!
+\\45 minutes advised for this part of the exam.
+\end{center}
 
-\section{Multiple choice questions }
+\section{Multiple choice questions (9 points)}
+
+  There is only \textbf{one} correct answer per question, the grading is :
+  
+  \begin{tabular}{rl}
+  $1$    &point for a correct answer.\\ 
+  $-0.5$ &points for a wrong answer.\\
+  $0$    &points for a unanswered question.\\
+  \end{tabular}
+\vspace{1cm}
 
 \begin{question}
-A \textbf{final} method 
+A \textbf{final} method
+\begin{multicols}{2}
 \begin{enumerate}
 \item cannot be invoked 
 \correct{cannot be overriden}
 \item must be overriden
 \item must be static
 \end{enumerate}
+\end{multicols}
 \end{question}
 
 \begin{question}
@@ -55,9 +72,19 @@ Which one of these propositions is \textbf{false} ?
 \end{question}
 
 \begin{question}
+Which one of these propositions is \textbf{false} ?
+\begin{enumerate}
+\item An interface can extend another interface.
+\correct{An interface can provide bodies for some of its methods.}
+\item A class can implement more than one interface.
+\item An interface can be used as a type. 
+\end{enumerate}
+\end{question}
+
+\begin{question}
 \hfill
 
-\begin{lstlisting}
+\begin{verbatim}
 class A {
   void foo() {System.out.print("A");}
 }
@@ -74,22 +101,24 @@ class C {
     c.foo();
   }
 }
-\end{lstlisting}
+\end{verbatim}
 
 What is printed when we run class C ?
+\begin{multicols}{2}
 \begin{enumerate}
-\item nothing because this program produces an error
+\item nothing because it produces an error
 \correct{ABB}
 \item ABA
 \item AAA
 \end{enumerate}
+\end{multicols}
 \end{question}
 
 
 \begin{question}
 \hfill
 
-\begin{lstlisting}
+\begin{verbatim}
 class A {
   A () {System.out.print("A");}
   A (int i) {System.out.print("A" + i);}
@@ -101,19 +130,21 @@ class C extends B {
   C (int i) {super(i);i++;System.out.print("C"+i);}
   C () {this(1);}
 }
-\end{lstlisting}
+\end{verbatim}
 
 What is printed when we call \lstinline!new C();! ?
+\begin{multicols}{2}
 \begin{enumerate}
 \item B1AC2
 \item A1B1C2
 \item B1C2A
 \correct{AB1C2}
 \end{enumerate}
+\end{multicols}
 \end{question}
 
 \begin{question} \hfill
-\begin{lstlisting}
+\begin{verbatim}
 public class A {
   static void foo(int i, String[] st) {
     i--;
@@ -126,17 +157,206 @@ public class A {
     System.out.println(greetings[0] + greetings[1] + i);
   }
 }
-\end{lstlisting}
+\end{verbatim}
 
 What does this program prints ?
+\begin{multicols}{2}
 \begin{enumerate}
 \correct{byebye1}
 \item byebye0
 \item hellohello1
-\item nothing because this program produces an error
+\item nothing because it produces an error
 \end{enumerate}
+\end{multicols}
 \end{question}
 
+\begin{question} \hfill
+\begin{verbatim}
+public class A {
+  void bar() throws Exception {
+    System.out.println("A");
+    throw new Exception();
+  }
+  void foo() {
+    try {
+      System.out.println("C");
+      bar();
+      System.out.println("D");
+    } catch (Exception e) {
+      System.out.println("E");
+      throw e;
+    }
+  }
+  public static void main(String args[]) {
+    A a = new A();
+    a.foo();
+  }
+}
+\end{verbatim}
 
+What does this program prints ?
+\begin{multicols}{2}
+\begin{enumerate}
+\item CAE
+\item CADE
+\item CAD
+\correct{nothing because it does not compile}
+\end{enumerate}
+\end{multicols}
+\end{question}
+
+\begin{question} \hfill
+\begin{verbatim}
+String a = "hello";
+String b = "hell";
+String c = b + "o";
+String d = a ;
+\end{verbatim}
+
+Which one of these propositions is \textbf{true} ?
+
+\begin{multicols}{2}
+\begin{enumerate}
+\item a == c 
+\correct{a.equals(c)};
+\item d == c;
+\item c == d;
+\end{enumerate}
+\end{multicols}
+\end{question}
+
+\pagebreak
+\section{Tree operations (7 points)}
+
+The class below models a binary tree. 
+A binary tree is composed of nodes.
+Each node has either two children or none at all.
+A node without childrens is called a \textbf{leaf}.
+
+Read and understand this class,  here is a drawing of the
+Tree T that is constructed in main:
+\begin{figure}[h]
+\begin{tikzpicture}
+  \node at(0,0) {0}
+    child{node{5}}
+    child{node{4}
+      child{node{1}}
+      child{node{2}}};
+\end{tikzpicture}
+\end{figure}
+
+\begin{verbatim}
+class Tree {
+  int nodeValue;
+  boolean leaf;
+  Tree left;
+  Tree right;
+
+  Tree(int nodeValue) {
+    this.nodeValue = nodeValue;
+    leaf = true;
+  }
+
+  Tree(int nodeValue, Tree left, Tree right) {
+    this.nodeValue = nodeValue;
+    this.left = left;
+    this.right = right;
+    leaf = false;
+  }
+
+  int getSum() {...}
+  boolean contains(int value) {...}
+
+  public static void main(String args[]) {
+    Tree T = new Tree(0, new Tree(5), new Tree(4, new Tree(1), new Tree(2)));
+    System.out.println("Sum of all the nodeValues = " + T.getSum());
+    System.out.println("Is value 5 in the tree ? " + T.contains(5));
+  }
+}
+\end{verbatim}
+
+\begin{question} (\textbf{3.5 points})\\
+Implement the body of method \lstinline!int getSum()!.
+This method should return the sum of all the node values of the calling tree.
+(For T it would be $12$).
+
+\begin{correction}
+\begin{verbatim}
+int getSum() {
+    if (leaf)
+      return nodeValue;
+    else
+      return nodeValue + left.getSum() + right.getSum();
+  }
+\end{verbatim}
+\end{correction}
+\end{question}
+
+\begin{question} (\textbf{3.5 points}) \\
+Implement the body of method \lstinline!boolean contains(int value)!.
+This method returns \lstinline!true! if and only if value is equal to one
+of the nodeValues in the tree.
+
+\begin{correction}
+\begin{verbatim}
+  boolean contains(int value) {
+    if (leaf) 
+      return nodeValue == value;
+    else
+      return left.contains(value) || right.contains(value);
+  }
+\end{verbatim}
+\end{correction}
+\end{question}
+
+\section{Summing vectors (4 points)}
+
+The class Vector belows models a vector of integer values.
+
+Comple methods length and sumWith.
+
+Method length should return the number of elements in the current vector.
+
+Method sumWith should compute the sum element by element of the current 
+vector with another one, keeping the results in the current one.
+Method sumWith should throw NotTheSameLength exception if vectors are of
+different size.
+
+\begin{verbatim}
+class NotTheSameLength extends Exception {}
+class Vector {
+  int [] values;
+  Vector(int [] values) {this.values = values;}
+  int length(){...}
+  void sumWith(Vector anotherVector) throws NotTheSameLength {...}
+
+  public static void main(String args[]) {
+    try {
+      Vector V1 = new Vector(new int[]{1,2,3,4,5});
+      Vector V2 = new Vector(new int[]{6,4,2,8,1});
+      V1.sumWith(V2);
+      /* here V1 values should be {7, 6, 5, 12, 6} */
+    }
+    catch (NotTheSameLength e) {
+      System.out.println("Vectors must have the same length!");
+    }
+  }
+}
+\end{verbatim}
+
+
+\begin{correction}
+\begin{verbatim}
+  int length(){return this.values.length;}
+
+  void sumWith(Vector anotherVector) throws NotTheSameLength 
+  {
+    if (this.length() != anotherVector.length()) throw new NotTheSameLength();
+    for (int i=0;i<this.length();i++) {
+      this.values[i] += anotherVector.values[i];
+    }
+  }
+\end{verbatim}
+\end{correction}
 
 \end{document}
