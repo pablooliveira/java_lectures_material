@@ -242,6 +242,7 @@ panel.add(button);
 \begin{frame}[fragile]
   \frametitle{Listener interface}
 \begin{verbatim}
+import java.awt.event.*;
 class ButtonListener implements ActionListener {
   JButton button;
   public ButtonListener(JButton button){
@@ -276,5 +277,30 @@ button.addActionListener(
   \end{itemize}
 \end{frame}
 
+\section{Drawing}
+\begin{frame}
+  \frametitle{Drawing}
+  \begin{itemize}
+    \item Override the JComponent's method \verb!void paintComponent(Graphics g)!.
+    \item This method is called each time the component must be redrawn.
+    \item The \verb!Graphics! object lets you draw inside the Component.
+    \item For a JFrame you can override the paint method.
+    \item See example!
+  \end{itemize}
+\end{frame}
+
+\section{Making your own components}
+\begin{frame}
+  \frametitle{Making your own components}
+  \begin{itemize}
+    \item As any other java class, \verb!JComponent! can be extended.
+    \item This can be useful in many cases:
+      \begin{itemize}
+        \item Factorizing a component and its listeners in the same class.
+        \item Changing the look of a component.
+        \item Adding functionalities to a component.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
 
 \end{document}
