@@ -1,4 +1,4 @@
-\documentclass[10pt]{beamer}
+\documentclass[10pt, handout]{beamer}
 \usepackage{xmpincl}
 \includexmp{license}
 \usepackage[T1]{fontenc}
@@ -12,8 +12,8 @@
 \setbeamertemplate{navigation symbols}{}
 
 % for printing
-%\usepackage{pgfpages}
-%\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+\usepackage{pgfpages}
+\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
 %\pgfpagesuselayout{resize to}[a4paper,border shrink=5mm,landscape]
 
 
@@ -636,5 +636,18 @@ class Crab extends Animal {
     \item When an object implements different behaviours, one should
       use interfaces.
   \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile, plain]
+\begin{center}
+  \tiny
+  This work is licensed under a Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported License.
+\vtop{
+  \vskip-3ex
+  \hbox{
+    \includegraphics[height=0.4cm]{cc-logo} 
+  }
+}
+\end{center}
 \end{frame}
 \end{document}
