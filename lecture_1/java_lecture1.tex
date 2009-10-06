@@ -1,4 +1,4 @@
-\documentclass[10pt, handout]{beamer}
+\documentclass[10pt]{beamer}
 \usepackage{xmpincl}
 \includexmp{license}
 \usepackage[T1]{fontenc}
@@ -10,8 +10,8 @@
 \setbeamertemplate{navigation symbols}{}
 
 % for printing
-\usepackage{pgfpages}
-\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
 %\pgfpagesuselayout{resize to}[a4paper,border shrink=5mm,landscape]
 
 
@@ -30,11 +30,11 @@
   \immediate\closeout\lstvrb@out
   \@esphack
   \endgroup
-  
+
   \begin{alertblock}{}
     \lstinputlisting[language=java]{\jobname.lst}
   \end{alertblock}}
-\makeatother 
+\makeatother
 
 \lstset{language=java, basicstyle=\small, commentstyle=\color{blue}\textrm}
 
@@ -65,7 +65,7 @@
           (making Java programs portable among different architectures).
     \item For the sake of performance and space, the JVM reads bytecode (a low level language).
     \item It is easier for humans to write programs in a more expressive, high level language, like Java.
-    \item The Java compiler is an automatic translator from Java to Bytecode. 
+    \item The Java compiler is an automatic translator from Java to Bytecode.
   \end{itemize}
 \end{frame}
 
@@ -77,7 +77,7 @@
     \begin{itemize}
       \item Find a computer representation of data
       \item Write methods to transform this data
-    \end{itemize} 
+    \end{itemize}
    \item In this lecture we will learn about:
   \end{itemize}
    \begin{description}
@@ -99,7 +99,7 @@
   \frametitle{Representing data}
   Data is encoded in memory as a binary string.
   \begin{code}
-  bin: 00000000 01001000 00000000 01101001 
+  bin: 00000000 01001000 00000000 01101001
   dec: 0        72       0        105
   \end{code}
   \structure{What does this value represent ?}
@@ -121,14 +121,14 @@
 
 % emphasize that = is different than equality
 \begin{frame}[fragile]
-  \frametitle{Variables and Types} 
+  \frametitle{Variables and Types}
   \begin{itemize}
   \item
   To lift this ambiguity we introduce \structure{types},
   which specify how a value should be used.
   \item
   We also give each value a name (should start with \{letter, \$, \_ \} and contain only \{alphanumeric, \$, \_\}).
-  \item 
+  \item
   We call the association (name, type, value) a variable.
   \end{itemize}
 
@@ -139,14 +139,14 @@
    \lstinline!byte life_expectancy = 70;! & 8 bit range $[-128..127]$ \\
    \lstinline!short year;! & 16 bit defined on $[-2^{15}..2^{15}-1]$ \\
    \lstinline!char unicode_character = 'A';! & UTF-16 caracter \\
-   \pause 
-   \lstinline!int city_population = 2167994;! & 32 bit range $[-2^{31}..2^{31}-1]$ \\ 
+   \pause
+   \lstinline!int city_population = 2167994;! & 32 bit range $[-2^{31}..2^{31}-1]$ \\
    \pause
    \lstinline!long molecules;! &  64 bit range $[-2^{63}..2^{63}-1]$ \\
    \hline
    \pause
    \lstinline!float mean_grade = 13.54;! & single precision(ex. 8 mt. 23) \\
-   \lstinline!double angular_speed;! & double precision(ex. 11 mt. 52) \\ 
+   \lstinline!double angular_speed;! & double precision(ex. 11 mt. 52) \\
   \end{longtable}
 \end{example}
 \end{frame}
@@ -155,20 +155,20 @@
 % maybe introduce scopes before XXX
 \begin{frame}[fragile]
   \frametitle{Mutable variables, assignment, final variables}
-  
+
   The value of a variable can be modified during the execution of a program,
-  except for final variables (which can only be assigned once). 
+  except for final variables (which can only be assigned once).
 
   \begin{code}
 int a; // variable declaration
-float b = 3; /* variable declaration with 
+float b = 3; /* variable declaration with
                 initial assignment */
 final float pi;
 pi = 3.14159;
 
 a = 8;  // assignment
 b = 1;  // assignment
-pi = 0; // illegal (won't compile) 
+pi = 0; // illegal (won't compile)
   \end{code}
 \end{frame}
 
@@ -179,7 +179,7 @@ pi = 0; // illegal (won't compile)
 
   \begin{code}
 // The type of the array price is float[]
-float[] price; 
+float[] price;
 
 // reserve memory for 3 elements
 price = new float[3];
@@ -190,7 +190,7 @@ price[1] = 5.99;
 price[2] = 3.25;
 
 // Syntax sugar for this is:
-float[] price = {1.00, 5.99, 3.25}; 
+float[] price = {1.00, 5.99, 3.25};
   \end{code}
 \end{frame}
 
@@ -203,7 +203,7 @@ float[] price = {1.00, 5.99, 3.25};
 
   \begin{alertblock}{Caution}
     \begin{itemize}
-    \item Strings and arrays are a mix between objects and primitive types and thus some care must be taken when manipulating them. 
+    \item Strings and arrays are a mix between objects and primitive types and thus some care must be taken when manipulating them.
     \item In the next lecture we will explain why when we'll talk about references and immutability.
     \end{itemize}
   \end{alertblock}
@@ -224,9 +224,9 @@ float[] price = {1.00, 5.99, 3.25};
   \item
   Operators are special symbols which perform an operation on some operands.
   \item
-  The semantic of the operator depends on the type of the operands. 
+  The semantic of the operator depends on the type of the operands.
   \end{itemize}
- 
+
   \begin{example}
    \begin{longtable}{l|r}
    \lstinline!a = 5; b[4] = 30!& assignment\\
@@ -237,14 +237,14 @@ float[] price = {1.00, 5.99, 3.25};
    \lstinline!"hello " + "world"! $\rightarrow$ \lstinline!"hello world"! & concatenation \\
    \pause
    \lstinline!4 * 4! $\rightarrow$ \lstinline!16! & multiplication \\
-   \lstinline!15 / 2! $\rightarrow$ \lstinline!7!,  
+   \lstinline!15 / 2! $\rightarrow$ \lstinline!7!,
    \lstinline!15.0 / 2! $\rightarrow$ \lstinline!7.5! & integer or float division \\
    \lstinline!15 % 2! $\rightarrow$ \lstinline!1! & modulo \\
    \pause
    \lstinline!15 > 12! $\rightarrow$ \lstinline!true! & bigger than \\
    \lstinline!< >= <=! & other comparison operators \\
   \end{longtable}
-  \end{example} 
+  \end{example}
 \end{frame}
 
 
@@ -262,11 +262,11 @@ float[] price = {1.00, 5.99, 3.25};
 
     a = 42;
     b = ++a;
-    \\here b evaluates to 43 and a to 43  
+    \\here b evaluates to 43 and a to 43
   \end{code}
   \item with \lstinline!++a! the value of a is incremented, then the right side of the assignment is evaluated.
   \item with \lstinline!a++! the right side of the assignment is evaluated, then a is incremented.
- 
+
 \end{itemize}
 \end{frame}
 
@@ -276,10 +276,10 @@ float[] price = {1.00, 5.99, 3.25};
   \item Operation + assignment (\lstinline!+= -= *= /=! etc ...)
   \begin{code}
      a += b;    // equivalent to:
-     a = a + b; 
+     a = a + b;
   \end{code}
   \item Equality \lstinline@==@ and Inequality \lstinline@!=@
-  \begin{code} 
+  \begin{code}
     int a, b;
     a = 5;
     c = 2;
@@ -302,7 +302,7 @@ float[] price = {1.00, 5.99, 3.25};
       /* not */     !a // --> true
       /* and */     a && b // --> false
       /* or */      a || b // --> true
-      
+
       /* Careful: Lazy */
       int a = 0;
       (false) && (a++ > 0) // a evaluates to 0
@@ -314,8 +314,8 @@ float[] price = {1.00, 5.99, 3.25};
 \begin{frame}[fragile]
   \frametitle{Other operators}
   \begin{itemize}
-    \item Ternary Operator (\lstinline!condition?true_stm:false_stm!)  ex: \lstinline!(a>b) ? a : b! 
-    \item Bitwise Operators (\lstinline!>> << >>> & |!) 
+    \item Ternary Operator (\lstinline!condition?true_stm:false_stm!)  ex: \lstinline!(a>b) ? a : b!
+    \item Bitwise Operators (\lstinline!>> << >>> & |!)
     \item \lstinline!instanceof!
     \end{itemize}
 \end{frame}
@@ -346,8 +346,8 @@ float[] price = {1.00, 5.99, 3.25};
   \only<3>{
   \includegraphics[height=3cm]{car1}
   }
-  \end{center} 
-   
+  \end{center}
+
 \end{example}
 \end{frame}
 
@@ -355,7 +355,7 @@ float[] price = {1.00, 5.99, 3.25};
   \frametitle{Classes}
   \only<1| handout:1>{
   \begin{Definition}
-    A \structure{class} is a blueprint for making objects. A class defines the common attributes 
+    A \structure{class} is a blueprint for making objects. A class defines the common attributes
     of a family of objects:
       \begin{itemize}
         \item the methods they share
@@ -377,7 +377,7 @@ float[] price = {1.00, 5.99, 3.25};
   \frametitle{Anatomy of a method}
   \begin{center}
   \includegraphics[width=\linewidth]{method_anatomy}
-  \end{center} 
+  \end{center}
 \end{frame}
 
 
@@ -390,7 +390,7 @@ class Turtle {
   double rotation;
 
   void turn(double angle) { rotation += angle; }
-  void advance() {  
+  void advance() {
     int step_size = 5;
     position.x += step_size * cos(rotation*Math.PI/180);
     position.y += step_size * sin(rotation*Math.PI/180);
@@ -402,7 +402,7 @@ class Turtle {
 }
   \end{code}
   \pause
-  \begin{code}  
+  \begin{code}
 Turtle turtle1 = new Turtle();
 Turtle turtle2 = new Turtle();
 
@@ -414,7 +414,7 @@ turtle2.turn(20); turtle2.advance();
 \begin{frame}[fragile]
   \frametitle{Instance Methods/Variables}
   \begin{itemize}
-  \item Objects turtle1 and turtle2 are called \alert{instances} of class Turtle, 
+  \item Objects turtle1 and turtle2 are called \alert{instances} of class Turtle,
   \item \lstinline!turtle2.color! represents the color \structure{for the specific instance turtle2}:
     \newline $\rightarrow$ \alert{color is an instance variable}
   \item \lstinline!turtle1.readPosition()! returns the position of \structure{the specific instance turtle1}:
@@ -438,8 +438,8 @@ class Turtle {
     \structure{Q: how to write a method independent from a particular instance ?}
     \begin{code}
 class Turtle {
-  static void degreesToRadians(double deg) { 
-    return deg * Math.PI/180; 
+  static double degreesToRadians(double deg) {
+    return deg * Math.PI/180;
   }
 }
 
@@ -459,17 +459,17 @@ Turtle.degreesToRadians(30); -> 1.0471975512
   \begin{definition}
     Variables defined inside a method are called local variables.
 
-    The scope of a variable is the portion of code where it is visible (ie. where you can read it, 
+    The scope of a variable is the portion of code where it is visible (ie. where you can read it,
     or modify it).
    \end{definition}
-   
+
     \begin{itemize}
       \item Local variables are only visible inside their method.
       \item Instance and Static variables are visible in all the methods from their class.
     \end{itemize}
 
     In the next lecture we will talk about the visibility of methods, and about access modifiers
-    that regulate the visibility of methods/variables outside their class. 
+    that regulate the visibility of methods/variables outside their class.
 \end{frame}
 
 
@@ -484,7 +484,7 @@ Turtle.degreesToRadians(30); -> 1.0471975512
     }
   \end{code}
   (Note: public means this method can be called from anywhere, this is a prerequisite for
-   the main method) 
+   the main method)
 \end{frame}
 %XXX anywhere ... explain better scopes
 
@@ -538,7 +538,7 @@ static int gcd(int a, int b) {
   \structure{More sophisticated loop}
 
   \begin{code}
-for (statement; predicate; statement) 
+for (statement; predicate; statement)
   block
 
 for (int i = 0; i < 100; i++) {
@@ -566,12 +566,13 @@ while (i < 100) {
 
 \begin{code}
 int whereIs(int element, int[] set) {
-  for (int i = 0; i < set.length; i++) {
+  int i;
+  for (i = 0; i < set.length; i++) {
     if (element == set[i]) {
       break;
-    } 
+    }
   }
-  return (i < set.length) ? i : -1; 
+  return (i < set.length) ? i : -1;
 }
 \end{code}
 \end{frame}
@@ -583,7 +584,7 @@ int whereIs(int element, int[] set) {
   for (int i = 0; i < set.length; i++) {
     if (element == set[i]) {
       return i;
-    } 
+    }
   }
   return -1;
 }
@@ -599,7 +600,7 @@ int whereIs(int element, int[] set) {
 \vtop{
   \vskip-3ex
   \hbox{
-    \includegraphics[height=0.4cm]{cc-logo} 
+    \includegraphics[height=0.4cm]{cc-logo}
   }
 }
 \end{center}
