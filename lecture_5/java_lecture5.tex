@@ -96,7 +96,7 @@ public static void main(String[] args) {
   panel.add(new JLabel("Hello World!"));
 
   frame.pack();
-  rframe.setVisible();
+  4frame.setVisible();
 }
 \end{verbatim}
 \begin{center}
@@ -309,10 +309,153 @@ button.addActionListener(
 \vtop{
   \vskip-3ex
   \hbox{
-    \includegraphics[height=0.4cm]{cc-logo} 
+    \includegraphics[height=0.4cm]{cc-logo}
   }
 }
 \end{center}
+\end{frame}
+
+\section{Exemple: Remember the Turtle ?}
+\begin{frame}
+  \frametitle{Exemple: Remember the Turtle ?}
+  \begin{itemize}
+  \item \alert{We are going to show, how the TurtleGraphics package was build.}
+  \item Two classes \texttt{Sheet} and \texttt{Turtle}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Sheet class : constructor 1/2}
+  \begin{itemize}
+    \item Create a JFrame and a Sheet.
+    \item Put the Sheet inside the JFrame.
+  \end{itemize}
+\begin{verbatim}
+/* A Sheet is a JComponent */
+public class Sheet extends JComponent {
+public Sheet(int width, int height) {
+  /* Set the prefered size of the Sheet */
+  this.setPreferredSize(new Dimension(width,height));
+
+  /* Create a frame to show the sheet */
+  JFrame f = new JFrame("Turtle");
+  f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+  /* Put the sheet inside the JFrame */
+  f.setContentPane(this);
+  f.pack();
+  f.setVisible(true);
+  ...
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Sheet class : constructor 2/2}
+  \begin{itemize}
+    \item Create a list to keep turtles.
+    \item Create an image for the turtles to draw in.
+  \end{itemize}
+\begin{verbatim}
+  /* Create a list to keep the turtles */
+  turtles = new LinkedList<Turtle>();
+
+  /* Create an image for the turtles to draw in */
+  offscreen = new BufferedImage(width,height,
+                                BufferedImage.TYPE_INT_RGB);
+
+  /* Set the turtle coordinate system */
+  gra = (Graphics2D) offscreen.getGraphics();
+  gra.translate(width/2,height/2);
+  gra.scale(1,-1);
+\end{verbatim}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Could we draw directly on the Sheet ?}
+  \begin{itemize}
+    \item Every JComponent, can be drawn onto with the method
+      \texttt{paint(Graphics g)}: So why are we not drawing directly
+      on the sheet ?
+    \item Problems:
+      \begin{itemize}
+      \item \alert{Drawing in a JComponent directly may cause flickering,
+          double buffering.}
+      \item \alert{When moving the Sheet around, resizing it, the drawings
+        goes away. Using the \texttt{offscreen} image buffer allows us to
+        implement persistant graphics.}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,shrink]
+  \frametitle{So how Turtles draw on the offscreen buffer ?}
+\begin{verbatim}
+public class Sheet {
+  protected void drawLine(double ax, double ay,
+                          double bx, double by,
+                          Color color) {
+    gra.setColor(color);
+    gra.draw(new Line2D.Double(ax,ay,bx,by));
+  }
+}
+
+public class Turtle {
+  public void advance(double steps) {
+    double newx = x + steps*Math.cos(theta);
+    double newy = y + steps*Math.sin(theta);
+    if (pen_down && sheet != null) {
+      sheet.drawLine(x,y,newx,newy, penColor);
+    }
+    x = newx;
+    y = newy;
+    sheet.repaint();
+  }
+}
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile, shrink]
+  \frametitle{Finally: Blitting the offscreen image and drawing the Turtles}
+\begin{verbatim}
+public class Sheet {
+public void paint(Graphics g) {
+  Graphics2D g2 = (Graphics2D) g;
+
+  /* draw the sheet image */
+  g2.drawImage(offscreen,0,0,this);
+
+  /* set turtle coordinate system */
+  g2.translate(width/2,height/2);
+  g2.scale(1,-1);
+
+  /* draw each turtle */
+  Iterator<Turtle> it = turtles.iterator();
+  while(it.hasNext()) {
+    Turtle t = it.next();
+    t.drawTurtle(g2);
+  }
+}
+}
+\end{verbatim}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{How does a Turtle draws itself ?}
+\begin{verbatim}
+public class Turtle {
+  ...
+  turtleColor = Color.BLUE;
+  turtleShape = new Polygon(new int[] {0,0,10},
+                            new int[] {3,-3,0}, 3);
+  ...
+  protected void drawTurtle(Graphics2D graphics) {
+    graphics.setColor(turtleColor);
+    graphics.translate(x,y);
+    graphics.rotate(theta);
+    graphics.fill(turtleShape);
+  }
+}
+\end{verbatim}
 \end{frame}
 
 \end{document}
