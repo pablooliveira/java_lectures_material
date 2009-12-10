@@ -17,7 +17,7 @@ public class QSort {
 	while (left <= to && l[left].compareTo(pivot) <= 0)
 	    left ++;
 	// find the next right item smaller than pivot
-	while (right > from && l[right].compareTo(pivot) >= 0)
+	while (right > from && l[right].compareTo(pivot) > 0)
 	    right --;
 	if (left >= right) break;
 	exch(l,left,right);

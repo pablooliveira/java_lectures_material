@@ -1,4 +1,4 @@
-NAME=java-exam-2008
+NAME=java-exercices-2009
 TABLES=
 
 %.table: %.gnuplot

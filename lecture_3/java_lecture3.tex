@@ -1,4 +1,4 @@
-\documentclass[10pt,handout]{beamer}
+\documentclass[10pt]{beamer}
 \usepackage{xmpincl}
 \includexmp{license}
 \usepackage[T1]{fontenc}
@@ -12,8 +12,8 @@
 \setbeamertemplate{navigation symbols}{}
 
 % for printing
-\usepackage{pgfpages}
-\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
 %\pgfpagesuselayout{resize to}[a4paper,border shrink=5mm,landscape]
 
 
@@ -32,11 +32,11 @@
   \immediate\closeout\lstvrb@out
   \@esphack
   \endgroup
-  
+
   \begin{alertblock}{}
     \lstinputlisting[language=java]{\jobname.lst}
   \end{alertblock}}
-\makeatother 
+\makeatother
 
 \lstset{language=java, basicstyle=\small, commentstyle=\color{blue}\textrm}
 
@@ -89,8 +89,8 @@
 \frametitle{Catching an Exception}
 \begin{code}
   try{
-    // code that can throw an exception 
-  } 
+    // code that can throw an exception
+  }
   catch (MyException1 e) {
     // treatment in case of Exception1
   }
@@ -168,7 +168,7 @@ is supposed to work with and thus can generate the appropriate checks.
       list = new Object[maxSize];
     }
     void add(Object o) throws Exception{
-      if (last >= maxSize) 
+      if (last >= maxSize)
         throw new Exception("no place left");
       list[last++] = o;
     }
@@ -195,7 +195,7 @@ is supposed to work with and thus can generate the appropriate checks.
       list = (T[]) new Object[maxSize];
     }
     void add(T o) throws Exception{
-      if (last >= maxSize) 
+      if (last >= maxSize)
         throw new Exception("no place left");
       list[last++] = o;
     }
@@ -218,8 +218,8 @@ class Example {
   <T> Example(T something) {}
   <T> void foo(T something) {}
 }
-  
-  Example e = new Example("Hello"); //type inference, 
+
+  Example e = new Example("Hello"); //type inference,
   e.foo(new Integer(3));            //no need to pass <>
 \end{code}
 \end{frame}
@@ -233,7 +233,7 @@ class Example {
 \begin{frame}
   \frametitle{Collections}
 \begin{definition}
-  Collections framework is a group of classes in java libraries which eases the manipulation of 
+  Collections framework is a group of classes in java libraries which eases the manipulation of
   group of objects.
 \end{definition}
 \begin{itemize}
@@ -270,10 +270,9 @@ class Example {
 \vtop{
   \vskip-3ex
   \hbox{
-    \includegraphics[height=0.4cm]{cc-logo} 
+    \includegraphics[height=0.4cm]{cc-logo}
   }
 }
 \end{center}
 \end{frame}
 \end{document}
-
