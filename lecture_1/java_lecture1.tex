@@ -83,7 +83,7 @@
    \begin{description}
       \item[primitive types:] Basic representations of data.
       \item[      operators:] Simple operations on data.
-      \item[        objects:] Combine data representation and methods to transform data.
+      \item[        classes:] Combine data representation and methods to transform data.
       \item[   control flow:] Control which operations are done and how many times.
    \end{description}
 \end{frame}
@@ -414,7 +414,7 @@ turtle2.turn(20); turtle2.advance();
 \begin{frame}[fragile]
   \frametitle{Instance Methods/Variables}
   \begin{itemize}
-  \item Objects turtle1 and turtle2 are called \alert{instances} of class Turtle,
+  \item Objects turtle1 and turtle2 are called \alert{instances or objects} of class Turtle,
   \item \lstinline!turtle2.color! represents the color \structure{for the specific instance turtle2}:
     \newline $\rightarrow$ \alert{color is an instance variable}
   \item \lstinline!turtle1.readPosition()! returns the position of \structure{the specific instance turtle1}:
@@ -448,8 +448,8 @@ Turtle.degreesToRadians(30); -> 1.0471975512
     \end{code}
     \pause
     \begin{definition}
-      A static variable is shared among all the objects of a class.
-      A static method is called in the context of a class and not for a specific object.
+      A static variable is shared among all the instances of a class.
+      A static method is called in the context of a class and not for a specific instance.
       Static variables are also called class variables.
     \end{definition}
 \end{frame}
