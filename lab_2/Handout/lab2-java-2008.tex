@@ -63,35 +63,35 @@ no teacher has to teach two courses the same day, and no student has to follow t
 \end{tikzpicture}
 
 \begin{exercice}[\textbf{class Person}]\\
-Write an abstract class Person that implements above methods.
-To store the first and last name use two private instance String variables.
+Write an abstract class \verb!Person! that implements above methods.
+To store the first and last name use two private instance \verb!String! variables.
 \end{exercice}
 
 \begin{exercice}[\textbf{classes Teacher and Student}]\\
-Write Teacher and Student classes that extend Person.
+Write \verb!Teacher! and \verb!Student! classes that extend \verb!Person!.
 Students should have in addition to a first and last name, a field for their current year in school. 
-Teacher and Student class should implement method print which prints the person name, the person type (teacher or student) 
-and in the case of students their current year.
+\verb!Teacher! and \verb!Student! classes should implement method print which prints the person name, the person type 
+(teacher or student) and in the case of students their current year.
 \end{exercice}
 
 \begin{exercice}[\textbf{class People}]\\
-Write a class People that extends java.util.ArrayList<Person> class.
+Write a class \verb!People! that extends \verb!java.util.ArrayList<Person>! class.
 This class will keep the list of students and teachers.
-It will provide a method printList, which calls print() for each Person it contains.
-Add a main method to this class that adds some teachers and students to People, and call printList.
+It will provide a method \verb!printList!, which calls \verb!print()! for each \verb!Person! it contains.
+Add a main method to this class that adds some teachers and students to \verb!People!, and call \verb!printList!.
 \end{exercice}
 
 \subsection{Sorting persons}
-Now we want to sort the persons in People, so that we can print them in alphabetical order.
-To achieve this we will use method java.util.Collections.sort() and interface java.util.Comparable.
-Read the documentation for interface Comparable at
+Now we want to sort the persons in \verb!People!, so that we can print them in alphabetical order.
+To achieve this we will use method \verb!java.util.Collections.sort()! and interface \verb!java.util.Comparable!.
+Read the documentation for interface \verb!Comparable! at
 \url{http://java.sun.com/j2se/1.4.2/docs/api/java/lang/Comparable.html}
 and for method sort at
 \url{http://java.sun.com/j2se/1.4.2/docs/api/java/util/Collections.html#sort(java.util.List)}.
 
 \begin{exercice}[\textbf{interface Comparable<Person>}]\\
-We want to specify a total order for objects of type Person. 
-To do this we will modify class Person so that it implements Comparable<Person>.
+We want to specify a total order for objects of type \verb!Person!. 
+To do this we will modify class \verb!Person! so that it implements \verb!Comparable<Person>!.
 We want to order persons using lexicographical order by their last name and if they have 
 the same last name by their first name.
 
@@ -106,8 +106,8 @@ For example this would be a valid ordering:
 \end{verbatim}
 \end{exercice}
 \begin{exercice}[\textbf{Sort People}]\\
-Add a method sort to class people that sorts its Persons, using static method java.util.Collections.sort();
-Test your implementation by calling printList.
+Add a method sort to class \verb!People! that sorts its \verb!Persons!, using static method \verb!java.util.Collections.sort()!.
+Test your implementation by calling \verb!printList!.
 \end{exercice}
 \section{Courses scheduler}
 \begin{tikzpicture}
@@ -143,69 +143,69 @@ Test your implementation by calling printList.
 
 \begin{exercice}[\textbf{Class Course}]\\
   Create a class course with the members listed above.
-  Each Course has a single teacher (provided in the constructor) and many students (added with method
-  add inherited from ArrayList).
+  Each \verb!Course! has a single teacher (provided in the constructor) and many students (added with method
+  \verb!add! inherited from \verb!ArrayList!).
   \begin{itemize}
   \item
-  Each course is either \emph{not scheduled} or \emph{scheduled for a specific day of the week, represented by an int}.
+  Each course is either \emph{not scheduled} or \emph{scheduled for a specific day of the week, represented by an} \verb!int!.
   \item
-  Method setDay, allows to schedule a Course for a specific day.
+  Method \verb!setDay!, allows to schedule a Course for a specific day.
   \item
-  Method unschedule, set the Course to \emph{not scheduled}.
+  Method \verb!unschedule!, set the Course to \emph{not scheduled}.
   \item
-  Method scheduled, returns true if the course is scheduled.
+  Method \verb!scheduled!, returns true if the course is scheduled.
   \item
-  Method compatible, check if current course is compatible with another course. ie, they have different teachers and they have no students in common.
+  Method \verb!compatible!, check if current course is compatible with another course. ie, they have different teachers and they have no students in common.
   \end{itemize}
 \end{exercice}
 
 \subsection{Scheduler}
-Finally we are going to write a class Schedule that tries to find a compatible schedule for a list of courses.
+Finally we are going to write a class \verb!Schedule! that tries to find a compatible schedule for a list of courses.
 
 \begin{exercice}[\textbf{Exceptions}]\\
-Create two new exception classes called IncompatibleSchedule and FoundSchedule.
+Create two new exception classes called \verb!IncompatibleSchedule! and \verb!FoundSchedule!.
 \end{exercice}
 
 
 \begin{exercice}[\textbf{Schedule}]\\
-Write a class Schedule like above but only implement method print().
-The method print should print all the Courses in Schedule, and the day they are
-scheduled or \verb!not scheduled! if they are not scheduled.
-Add a list of courses to a Schedule and call print(), all the courses should be marked
-as \verb!not scheduled!.
+Write a class \verb!Schedule! like above but only implement method \verb!print()!.
+The method \verb!print! should print all the \verb!Courses! in \verb!Schedule!, and the day they are
+scheduled or \emph{not scheduled} if they are not scheduled.
+Add a list of courses to a \verb!Schedule! and call \verb!print()!, all the courses should be marked
+as \emph{not scheduled}.
 \end{exercice}
 
 \begin{exercice}[\textbf{checkSchedule}]\\
-Implement method checkSchedule.
-This method takes a Course:
+Implement method \verb!checkSchedule!.
+This method takes a \verb!Course!:
 \begin{itemize}
 \item if all the others courses scheduled the same day are compatible, it does nothing.
-\item if one of them is not compatible, it throws exception IncompatibleSchedule.
+\item if one of them is not compatible, it throws exception \verb!IncompatibleSchedule!.
 \end{itemize}
 \end{exercice}
 
 \begin{exercice}[\textbf{updateSchedule}]\\
-Implement method updateSchedule, using method checkSchedule.
-This method tries to find a schedule for all the Courses, if this schedule is found it throws
-ScheduleFound, if no compatible schedule exists it throws IncompatibleSchedule.
+Implement method \verb!updateSchedule!, using method \verb!checkSchedule!.
+This method tries to find a schedule for all the \verb!Courses!, if this schedule is found it throws
+\verb!ScheduleFound!, if no compatible schedule exists it throws \verb!IncompatibleSchedule!.
 
 \begin{itemize}
 \item To implement this method you will use a backtracking algorithm. 
 \begin{enumerate}
-  \item If all the courses are scheduled, throw ScheduleFound.
+  \item If all the courses are scheduled, throw \verb!ScheduleFound!.
   \item If there still are unscheduled courses, take one of them.
   \item For each of the available days:
   \begin{enumerate}
     \item Try to schedule if for day d.
-    \item call updateSchedule() recursively to try to schedule the other courses.
+    \item call \verb!updateSchedule()! recursively to try to schedule the other courses.
     \item if there is a schedule incompatibility, try another day.
   \end{enumerate}
-  \item if there is no possible day on which to schedule the course, throw IncompatibleSchedule. 
+  \item if there is no possible day on which to schedule the course, throw \verb!IncompatibleSchedule!. 
 \end{enumerate}
 \end{itemize}
 \end{exercice}
 \begin{exercice}[\textbf{Test}]\\
 Add some students, teachers and courses and test the scheduling algorithm. 
-To avoid adding a lot of courses, you can set daysInSchoolWeek to a small value.
+To avoid adding a lot of courses, you can set \verb!daysInSchoolWeek! to a small value.
 \end{exercice}
 \end{document}
