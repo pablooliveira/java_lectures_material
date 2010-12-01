@@ -1,0 +1,261 @@
+\documentclass[correction]{exercices}
+\usepackage{ae, aeguill, graphicx}
+\usepackage{fullpage}
+\usepackage{xspace}
+\usepackage{color}
+\usepackage{amsmath, amssymb}
+\usepackage{latexsym}
+\usepackage{url}
+\usepackage{tikz}
+\usetikzlibrary{trees}
+\usepackage{verbatim}
+\renewcommand{\labelenumi}{(\alph{enumi})}
+
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{verbatim}
+
+\lstset{language=java, showstringspaces=false}
+
+
+\begin{document}
+
+\sujet{Introduction to Java MsC - Exam - 2010}
+
+\begin{center}
+Documents and notes allowed. All electronic devices are forbidden.
+\\Answer on a separate sheet and don't forget to put your name on it!
+\\45 minutes advised for this part of the exam.
+\end{center}
+
+\section{Exercices (8 points)}
+
+\begin{question} \textbf{(2 points)}
+\begin{verbatim}
+String a = "hel";
+String b = "hel";
+String c = "lo";
+String d = a;
+a = a + c;
+b += c;
+\end{verbatim}
+
+Which predicate(s) are \textbf{true}, after
+executing the previous code block ?
+
+\begin{multicols}{2}
+\begin{enumerate}
+\item a == b
+\item b == a
+\item d == a
+\item d.equals(a)
+\item a.equals(c)
+\correct{b.equals(a)}
+\correct{a.equals(b)}
+\end{enumerate}
+\end{multicols}
+\end{question}
+
+
+\begin{question} \textbf{(3 points)}
+\begin{verbatim}
+class A {
+  A () {System.out.print("A");}
+  A (int i) {System.out.print("A" + i);}
+}
+class B extends A {
+  B (int i) {this();System.out.print("B" + i);}
+  B () {System.out.print("B");}
+}
+class C extends B {
+  C (int i) {super(i+1);i++;System.out.print("C"+i);}
+}
+public class Test {
+  public static void main(String args[]) {
+    new C(2);
+  }
+}
+\end{verbatim}
+
+When executed, what does class \verb!Test! print ?
+\begin{correction}
+ABB3C3
+\end{correction}
+\end{question}
+
+\begin{question} \textbf{(3 points)}
+\begin{verbatim}
+public class Test {
+  static int secret(int a[], int v) {
+    int i = 0;
+    while(v < a.length) {
+      a[v] = a[v] - 1;
+      v ++;
+    }
+    return v;
+  }
+  public static void main(String args[])
+  {
+    int a [] = {4,2,1,6,9,2};
+    int v = secret(a,3);
+    for (int i=0; i < a.length; i++) {
+      System.out.println(a[i]);
+    }
+    System.out.println(v);
+  }
+}
+\end{verbatim}
+
+When executed, what does class \verb!Test! print ?
+\begin{correction}
+4
+2
+1
+5
+8
+1
+6
+\end{correction}
+\end{question}
+
+\section{Problem: Lists and Sets (9 points)}
+You are provided with class \verb!SimpleList! which
+implements a list of \verb!int! elements.
+\begin{verbatim}
+class SimpleList {
+  int length();
+  int getAt(int pos);
+  void insertBefore(int pos, int newEl);
+}
+\end{verbatim}
+
+To manipulate a \verb!SimpleList! you can only use three methods:
+\begin{itemize}
+  \item \verb!int length()!, which returns the number of elements
+    in the list.
+  \item \verb!int getAt(int pos)!, which returns the
+    element inside the list at position \verb!pos!.
+    The position of the first element of list \verb!L! is $0$ and the
+    position of the last element is $(\texttt{L.length()} - 1)$.
+    If \verb!pos! is smaller than $0$ or greater than $\texttt{L.length()}-1$
+    then the method returns $0$.
+  \item \verb!int insertBefore(int pos, int newEl)!, which inserts an
+    element, \verb!newEl!, at position \verb!pos! and shifts the old
+    element (if any) to the right.
+    If \verb!pos! is smaller than $0$ or greater than $\texttt{L.length()}$
+    then the method does nothing.
+
+    Let's look at an example, suppose we start with an empty \verb!SimpleList!,
+\begin{verbatim}
+  SimpleList L = new SimpleList();
+  L.insertBefore(0, 5);  /* now the list contains a single element <5>     */
+  L.insertBefore(0, 4);  /* now the list contains two elements <4,5>       */
+  L.insertBefore(2, 7);  /* now the list contains three elements <4,5,7>   */
+  L.insertBefore(2, -3); /* now the list contains four elements <4,5,-3,7> */
+  L.insertBefore(5, 2);  /* this does nothing                              */
+\end{verbatim}
+\end{itemize}
+
+An integer set is a collection of unique integers: all the elements
+in the set are different. One way of implementing a set
+is by using a list where the elements are always inserted
+in increasing order (that is to say, given two
+positions $\texttt{pos1} < \texttt{pos2}$ in the list \verb!L!,
+the predicate $\texttt{L.getAt(pos1)} < \texttt{L.getAt(pos2)}$ is
+always true).
+
+You are provided with the class skeleton below, that implements
+method \verb!size! which returns the number of elements in the set,
+\begin{verbatim}
+  class OrderedSet {
+    private SimpleList list;
+    OrderedSet() {
+      this.list = new SimpleList();
+    }
+    int size() {return this.list.length();}
+    void print() {
+      ...
+    }
+    void insert(int newEl) {
+      ...
+    }
+    static OrderedSet intersection(OrderedSet o1, OrderedSet o2) {
+      ...
+    }
+  }
+\end{verbatim}
+
+\begin{question} \textbf{Printing a set} (\textbf{1.5 points}) \\
+  Write the method \verb!void print()! that should print all the elements
+  in the set using the method \verb!System.out.println!.
+\begin{correction}
+\begin{verbatim}
+    void print() {
+       for (int i = 0; i < this.size(); i++)
+           System.out.println(this.list.getAt(i));
+    }
+\end{verbatim}
+\end{correction}
+\end{question}
+
+\begin{question} \textbf{Insertion in sorted order} (\textbf{3.5 points}) \\
+  Write the method \verb!void insert(int newEl)! that should insert the new
+  element, \verb!newEl!, in the private list so that the elements in the private
+  list stay in increasing order. If the element we are trying to insert already
+  belongs to the list, this method does nothing. (You are not required to
+  optimize for efficiency.)
+\begin{correction}
+\begin{verbatim}
+void insert(int newEl) {
+  int i = 0;
+  for (; i < this.size(); i++) {
+    if (list.getAt(i) == newEl) return;
+    if (list.getAt(i) > newEl) break;
+  }
+  list.insertBefore(i, newEl);
+}
+
+OR
+
+void faster_insert(int newEl) {
+  int low = 0;
+  int high = this.size()-1;
+
+  while(low <= high) {
+    int mid = (high+low)/2;
+    if (list.getAt(mid) == newEl) return;
+    else if (list.getAt(mid) < newEl) low = mid + 1;
+    else high = mid - 1;
+  }
+  list.insertBefore(low, newEl);
+}
+\end{verbatim}
+\end{correction}
+\end{question}
+
+\begin{question} \textbf{Intersection of two sets} (\textbf{4 points}) \\
+  Write the method
+  \verb!static OrderedSet intersection(OrderedSet o1, OrderedSet o2)!
+  that should compute the intersection of two sets. In other words, this
+  method should return a new OrderedSet which contains all the elements
+  that belong to \verb!o1! \textbf{and} to \verb!o2!.
+\begin{correction}
+\begin{verbatim}
+static OrderedSet intersection(OrderedSet o1, OrderedSet o2) {
+  OrderedSet newO = new OrderedSet();
+  int i = 0, j = 0;
+  while(i < o1.size() && j < o2.size()) {
+    if (o1.list.getAt(i) < o2.list.getAt(j)) i++;
+    else if (o1.list.getAt(i) > o2.list.getAt(j)) j++;
+    else {
+      newO.insert(o1.list.getAt(i));
+      i++; j++;
+    }
+  }
+  return newO;
+}
+\end{verbatim}
+\end{correction}
+\end{question}
+
+\end{document}
